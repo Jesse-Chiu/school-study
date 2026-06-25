@@ -1,0 +1,84 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '4-2-2',
+  unitId: 'unit4',
+  chapterId: 'ch4-2',
+  title: '第二节 消化和吸收',
+  learningGoals: [
+    '描述人体消化系统的组成',
+    '描述食物的消化过程',
+    '说明小肠是消化和吸收的主要场所',
+  ],
+  knowledgePoints: [
+    {
+      id: '4-2-2-k1',
+      title: '一、消化系统的组成',
+      content: '消化系统由<strong>消化道</strong>和<strong>消化腺</strong>组成：<br/><br/><strong>消化道</strong>（按顺序排列）：<br/>口腔 → 咽 → 食道 → <strong>胃</strong> → <strong>小肠</strong> → 大肠 → 肛门<br/><br/><strong>消化腺</strong>：<br/>• 唾液腺（分泌唾液，含唾液淀粉酶）<br/>• 胃腺（分泌胃液）<br/>• <strong>肝脏</strong>（分泌<strong>胆汁</strong>，储存在胆囊，<strong>不含消化酶</strong>，但能乳化脂肪）<br/>• <strong>胰腺</strong>（分泌胰液，含多种消化酶）<br/>• 肠腺（分泌肠液）',
+      keyTerms: ['消化道', '消化腺', '唾液腺', '肝脏', '胆汁', '胰腺', '胰液'],
+      children: [],
+    },
+    {
+      id: '4-2-2-k2',
+      title: '二、食物的消化',
+      content: '<strong>消化</strong>：食物在消化道内被分解成可以被细胞吸收的小分子物质的过程。<br/><br/><strong>淀粉的消化</strong>：淀粉 →（唾液淀粉酶、胰肠淀粉酶）→ 麦芽糖 →（胰肠麦芽糖酶）→ <strong>葡萄糖</strong><br/><strong>蛋白质的消化</strong>：蛋白质 →（胃液、胰液）→ 多肽 →（胰蛋白酶、肠肽酶）→ <strong>氨基酸</strong><br/><strong>脂肪的消化</strong>：脂肪 →（胆汁乳化）→ 脂肪微粒 →（胰脂肪酶、肠脂肪酶）→ <strong>甘油 + 脂肪酸</strong><br/><br/><strong>主要消化场所</strong>：<strong>小肠</strong>（胰液、肠液、胆汁都进入小肠）',
+      keyTerms: ['消化', '淀粉', '蛋白质', '脂肪', '葡萄糖', '氨基酸', '甘油', '脂肪酸'],
+      children: [],
+    },
+    {
+      id: '4-2-2-k3',
+      title: '三、营养物质的吸收',
+      content: '<strong>吸收</strong>：小分子营养物质通过消化道壁进入循环系统的过程。<br/><br/><strong>各段消化道的吸收能力</strong>：<br/>• <strong>口腔、食道</strong>：几乎不吸收<br/>• <strong>胃</strong>：吸收少量水、酒精<br/>• <strong>小肠</strong>：<strong>主要吸收场所</strong>（葡萄糖、氨基酸、甘油、脂肪酸、大部分水、无机盐、维生素）<br/>• <strong>大肠</strong>：吸收少量水、无机盐、部分维生素<br/><br/><strong>小肠适合吸收的特点</strong>：<br/>1. <strong>长度长</strong>（约5-6米）<br/>2. <strong>皱襞和绒毛</strong>（增大表面积，约200平方米）<br/>3. 绒毛壁<strong>薄</strong>（只由一层上皮细胞构成）',
+      keyTerms: ['吸收', '小肠', '皱襞', '绒毛', '表面积'],
+      children: [],
+    },
+  ],
+  exercises: [
+    {
+      id: '4-2-2-ex1',
+      type: 'true-false',
+      question: '肝脏分泌的胆汁含有消化脂肪的酶。',
+      answer: '错误',
+      explanation: '肝脏分泌的胆汁不含消化酶，但能将脂肪乳化成脂肪微粒，增大脂肪与消化酶的接触面积，促进脂肪的消化。',
+      difficulty: 1,
+    },
+    {
+      id: '4-2-2-ex2',
+      type: 'single-choice',
+      question: '人体消化和吸收的主要场所是？',
+      options: ['A. 口腔', 'B. 胃', 'C. 小肠', 'D. 大肠'],
+      answer: 'C',
+      explanation: '小肠是消化和吸收的主要场所。小肠长、有皱襞和绒毛（巨大表面积）、有胰液肠液胆汁（多种消化酶），适合消化和吸收。',
+      difficulty: 1,
+    },
+    {
+      id: '4-2-2-ex3',
+      type: 'single-choice',
+      question: '下列哪种营养物质不需要消化就能直接被吸收？',
+      options: ['A. 淀粉', 'B. 蛋白质', 'C. 脂肪', 'D. 维生素'],
+      answer: 'D',
+      explanation: '维生素、水、无机盐是小分子物质，不需要消化就能直接被吸收。淀粉、蛋白质、脂肪是大分子物质，需要消化成小分子才能被吸收。',
+      difficulty: 1,
+    },
+    {
+      id: '4-2-2-ex4',
+      type: 'single-choice',
+      question: '小肠适合吸收营养物质的特点不包括？',
+      options: ['A. 长度长', 'B. 有皱襞和绒毛', 'C. 绒毛壁薄', 'D. 能分泌胆汁'],
+      answer: 'D',
+      explanation: '小肠适合吸收的特点：长度长（5-6米）、有皱襞和绒毛（增大表面积）、绒毛壁薄（一层上皮细胞）。胆汁是肝脏分泌的，储存在胆囊，进入小肠帮助消化脂肪，不是小肠分泌。',
+      difficulty: 2,
+    },
+    {
+      id: '4-2-2-ex5',
+      type: 'multi-choice',
+      question: '下列哪些消化液含有消化糖类、蛋白质、脂肪的酶？（多选）',
+      options: ['A. 唾液', 'B. 胃液', 'C. 胰液', 'D. 肠液'],
+      answer: ['C', 'D'],
+      explanation: '胰液和肠液含有消化糖类、蛋白质、脂肪的多种酶。唾液只含唾液淀粉酶（消化淀粉）。胃液只含胃蛋白酶（消化蛋白质）。胆汁不含酶。',
+      difficulty: 2,
+    },
+  ],
+};
+
+export default sectionData;

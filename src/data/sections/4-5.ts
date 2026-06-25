@@ -1,0 +1,90 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '4-5',
+  unitId: 'unit4',
+  chapterId: 'ch4-5',
+  title: '第五章 人体内废物的排出',
+  learningGoals: [
+    '描述泌尿系统的组成',
+    '说明尿的形成过程',
+    '关注泌尿系统的卫生',
+  ],
+  knowledgePoints: [
+    {
+      id: '4-5-k1',
+      title: '一、泌尿系统的组成',
+      content: '泌尿系统由<strong>肾脏、输尿管、膀胱、尿道</strong>组成：<br/><br/>• <strong>肾脏</strong>：<strong>形成尿液</strong>的器官（形似蚕豆，约11cm×5cm×3cm）<br/>• <strong>输尿管</strong>：输送尿液（肾脏 → 膀胱）<br/>• <strong>膀胱</strong>：<strong>暂时储存尿液</strong><br/>• <strong>尿道</strong>：排出尿液（男性尿道长，女性尿道短）<br/><br/>注意：人体有<strong>两个肾脏</strong>，左右各一个。',
+      keyTerms: ['肾脏', '输尿管', '膀胱', '尿道', '形成尿液', '储存尿液'],
+      children: [],
+    },
+    {
+      id: '4-5-k2',
+      title: '二、肾脏的结构和功能单位——肾单位',
+      content: '每个肾脏约有<strong>100万个肾单位</strong>，肾单位是形成尿液的基本单位。<br/><br/>肾单位包括：<br/>• <strong>肾小球</strong>：毛细血管球，<strong>滤过作用</strong><br/>• <strong>肾小囊</strong>：套在肾小球外面，接受滤过的液体<br/>• <strong>肾小管</strong>：<strong>重吸收作用</strong>（将有用物质重新吸收回血液）<br/><br/>肾小球和肾小囊内壁的<strong>滤过作用</strong>：除血细胞和大分子蛋白质外，血浆中的部分水、无机盐、葡萄糖、尿素滤过到肾小囊中，形成<strong>原尿</strong>。',
+      keyTerms: ['肾单位', '肾小球', '肾小囊', '肾小管', '滤过', '重吸收', '原尿'],
+      children: [],
+    },
+    {
+      id: '4-5-k3',
+      title: '三、尿的形成过程',
+      content: '尿的形成包括两个过程：<br/><br/>1. <strong>肾小球的滤过作用</strong>：<br/>血液 →（经肾小球滤过）→ <strong>原尿</strong>（含：水、无机盐、葡萄糖、尿素；不含：血细胞、大分子蛋白质）<br/><br/>2. <strong>肾小管的重吸收作用</strong>：<br/>原尿 →（经肾小管重吸收，全部葡萄糖、大部分水、部分无机盐被重吸收回血液）→ <strong>尿液</strong>（含：水、无机盐、尿素）<br/><br/>正常人每天形成原尿约180L，但排出尿液约1.5L，因为大部分水被重吸收了。',
+      keyTerms: ['滤过', '重吸收', '原尿', '尿液', '180L', '1.5L'],
+      children: [],
+    },
+    {
+      id: '4-5-k4',
+      title: '四、排尿的意义',
+      content: '1. 排出<strong>代谢废物</strong>（尤其是尿素）<br/>2. 调节体内<strong>水和无机盐的平衡</strong><br/>3. 维持<strong>组织细胞的正常生理功能</strong><br/><br/>排尿是排泄的主要途径（另外还有汗液和呼气）。',
+      keyTerms: ['排泄', '尿素', '水平衡', '无机盐平衡'],
+      children: [],
+    },
+  ],
+  exercises: [
+    {
+      id: '4-5-ex1',
+      type: 'true-false',
+      question: '原尿中含有大分子蛋白质，因为蛋白质对人体很重要，需要排出体外。',
+      answer: '错误',
+      explanation: '原尿中不含大分子蛋白质。肾小球的滤过作用不能滤过血细胞和大分子蛋白质，它们留在血液中。如果尿液中出现蛋白质，可能是肾小球有问题（蛋白尿）。',
+      difficulty: 2,
+    },
+    {
+      id: '4-5-ex2',
+      type: 'single-choice',
+      question: '血液流经肾小球后，发生的变化是？',
+      options: ['A. 含氧量减少', 'B. 尿素等废物减少', 'C. 血细胞减少', 'D. 蛋白质减少'],
+      answer: 'B',
+      explanation: '血液流经肾小球时，部分水、无机盐、葡萄糖、尿素等滤过到肾小囊中形成原尿，因此血液中尿素等废物减少。血细胞和大分子蛋白质不能滤过，所以不变。',
+      difficulty: 2,
+    },
+    {
+      id: '4-5-ex3',
+      type: 'single-choice',
+      question: '正常人每天的原尿量约180L，但排出的尿液只有约1.5L，主要原因是？',
+      options: ['A. 肾小球滤过作用有限', 'B. 肾小管的重吸收作用', 'C. 膀胱的储存作用', 'D. 汗腺排出了大量水'],
+      answer: 'B',
+      explanation: '原尿中的全部葡萄糖、大部分水和部分无机盐被肾小管重吸收回血液，所以最终排出的尿液只有约1.5L。',
+      difficulty: 1,
+    },
+    {
+      id: '4-5-ex4',
+      type: 'single-choice',
+      question: '尿液中出现血细胞和大分子蛋白质，最可能是哪个结构发生了病变？',
+      options: ['A. 肾小管', 'B. 肾小球', 'C. 肾小囊', 'D. 输尿管'],
+      answer: 'B',
+      explanation: '正常尿液中不含血细胞和大分子蛋白质。如果尿液中出现这些物质，说明肾小球的滤过作用出现异常（滤过屏障受损），不能有效阻挡血细胞和大分子蛋白质。',
+      difficulty: 2,
+    },
+    {
+      id: '4-5-ex5',
+      type: 'fill-blank',
+      question: '尿的形成包括___和___两个过程：血液经___滤过形成原尿，原尿经___重吸收（全部___被重吸收）后形成尿液。',
+      answer: ['肾小球滤过', '肾小管重吸收', '肾小球', '肾小管', '葡萄糖'],
+      explanation: '尿的形成包括肾小球滤过和肾小管重吸收两个过程。理解这两个过程是掌握排泄知识的关键。',
+      difficulty: 2,
+    },
+  ],
+};
+
+export default sectionData;

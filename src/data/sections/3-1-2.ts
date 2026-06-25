@@ -1,0 +1,120 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '3-1-2',
+  unitId: 'unit3',
+  chapterId: 'ch3-1',
+  title: '第二节 植株的生长',
+  learningGoals: [
+    '描述幼根的生长过程',
+    '说明叶芽是怎样发育成枝条的',
+    '举例说明植株生长需要的无机盐',
+  ],
+  knowledgePoints: [
+    {
+      id: '3-1-2-k1',
+      title: '一、幼根的生长',
+      content: '根尖是幼根生长最快的部位，根尖从顶端到着生根毛的一小段，由四部分组成：<br/><br/>1. <strong>根冠</strong>：顶端，细胞大、排列不整齐，<strong>保护作用</strong><br/>2. <strong>分生区</strong>：细胞小、排列紧密，能<strong>分裂产生新细胞</strong><br/>3. <strong>伸长区</strong>：细胞逐渐长大，<strong>细胞伸长</strong>，使根不断长长<br/>4. <strong>成熟区</strong>：表皮细胞形成<strong>根毛</strong>，是<strong>吸收水和无机盐的主要部位</strong>',
+      keyTerms: ['根尖', '根冠', '分生区', '伸长区', '成熟区', '根毛'],
+      children: [
+        {
+          id: '3-1-2-k1-1',
+          title: '幼根生长的原因',
+          content: '幼根的生长依靠：<br/>• <strong>分生区</strong>细胞分裂 → 增加细胞数量<br/>• <strong>伸长区</strong>细胞伸长 → 增加细胞体积',
+          keyTerms: ['细胞分裂', '细胞伸长'],
+        },
+      ],
+    },
+    {
+      id: '3-1-2-k2',
+      title: '二、枝条的发育',
+      content: '枝条是由<strong>芽</strong>发育成的。叶芽的结构及发育：<br/><br/>• <strong>幼叶</strong> → 发育成 <strong>叶</strong><br/>• <strong>芽轴</strong> → 发育成 <strong>茎</strong><br/>• <strong>芽原基</strong> → 发育成 <strong>芽</strong><br/><br/>芽中有<strong>分生组织</strong>，细胞不断分裂和分化，使芽发育成枝条。',
+      keyTerms: ['芽', '叶芽', '幼叶', '芽轴', '芽原基', '分生组织'],
+      children: [
+        {
+          id: '3-1-2-k2-1',
+          title: '茎的加粗生长',
+          content: '木本植物的茎能不断加粗，是因为茎中有<strong>形成层</strong>（分生组织），细胞不断分裂和分化。形成层的活动形成<strong>年轮</strong>。',
+          keyTerms: ['形成层', '年轮', '加粗生长'],
+        },
+        {
+          id: '3-1-2-k2-2',
+          title: '芽的分类',
+          content: '按位置分：<strong>顶芽</strong>（顶端）和<strong>侧芽</strong>（侧面）<br/>按发育结果分：<strong>叶芽</strong>（发育成枝）、<strong>花芽</strong>（发育成花）、<strong>混合芽</strong>（既能发育成枝也能开花）',
+          keyTerms: ['顶芽', '侧芽', '叶芽', '花芽', '混合芽'],
+        },
+      ],
+    },
+    {
+      id: '3-1-2-k3',
+      title: '三、植株生长需要的营养物质',
+      content: '植株生长需要：<strong>水、无机盐（来自土壤，根吸收）</strong>和<strong>有机物（叶片光合作用制造）</strong>。<br/><br/>植物生长需要量最多的是含<strong>氮、磷、钾</strong>的无机盐：<br/>• <strong>缺氮</strong>：植株矮小，叶片发黄<br/>• <strong>缺磷</strong>：植株矮小，叶片暗绿或紫色<br/>• <strong>缺钾</strong>：茎秆软弱，易倒伏，叶片边缘褐色',
+      keyTerms: ['氮', '磷', '钾', '缺氮', '缺磷', '缺钾', '无土栽培'],
+      children: [
+        {
+          id: '3-1-2-k3-1',
+          title: '无土栽培',
+          content: '不用土壤，用<strong>营养液</strong>栽培植物的方法。可以更合理地满足植物对各类无机盐的需要，实现工厂化生产。',
+          keyTerms: ['营养液', '工厂化'],
+        },
+      ],
+    },
+  ],
+  exercises: [
+    {
+      id: '3-1-2-ex1',
+      type: 'true-false',
+      question: '根的生长主要依靠分生区细胞的分裂和伸长区细胞的伸长。',
+      answer: '正确',
+      explanation: '幼根的生长一方面靠分生区细胞分裂增加细胞数量，另一方面靠伸长区细胞伸长增加细胞体积。',
+      difficulty: 1,
+    },
+    {
+      id: '3-1-2-ex2',
+      type: 'single-choice',
+      question: '根尖中吸收水和无机盐的主要部位是？',
+      options: ['A. 根冠', 'B. 分生区', 'C. 伸长区', 'D. 成熟区'],
+      answer: 'D',
+      explanation: '成熟区有大量的根毛，增大了吸收面积，是根吸收水和无机盐的主要部位。',
+      difficulty: 1,
+    },
+    {
+      id: '3-1-2-ex3',
+      type: 'single-choice',
+      question: '叶芽中的芽原基将来发育成？',
+      options: ['A. 叶', 'B. 茎', 'C. 芽', 'D. 花'],
+      answer: 'C',
+      explanation: '叶芽的结构中，幼叶发育成叶，芽轴发育成茎，芽原基发育成芽。',
+      difficulty: 1,
+    },
+    {
+      id: '3-1-2-ex4',
+      type: 'single-choice',
+      question: '准备移栽的茄子幼苗根部总是带有一个土团，这是为了保护哪个结构？',
+      options: ['A. 根冠', 'B. 分生区', 'C. 伸长区', 'D. 成熟区（根毛）'],
+      answer: 'D',
+      explanation: '带土移栽是为了保护根毛和幼根，保证根的吸收功能不受影响，提高移栽成活率。',
+      difficulty: 2,
+    },
+    {
+      id: '3-1-2-ex5',
+      type: 'single-choice',
+      question: '植物缺氮时，最可能出现的症状是？',
+      options: ['A. 叶片发黄', 'B. 茎秆软弱易倒伏', 'C. 叶片出现紫色', 'D. 只开花不结果'],
+      answer: 'A',
+      explanation: '缺氮时植株矮小，叶片发黄（老叶先黄）。缺钾时茎秆软弱易倒伏。缺磷时叶片出现紫色。缺硼时只开花不结果。',
+      difficulty: 2,
+    },
+    {
+      id: '3-1-2-ex6',
+      type: 'multi-choice',
+      question: '下列哪些无机盐是植物生长需要量最多的？（多选）',
+      options: ['A. 含氮的无机盐', 'B. 含磷的无机盐', 'C. 含钾的无机盐', 'D. 含硼的无机盐'],
+      answer: ['A', 'B', 'C'],
+      explanation: '植物生长需要量最多的是含氮、含磷和含钾的无机盐。含硼的无机盐需要量极小，但也很重要（如防止油菜只开花不结果）。',
+      difficulty: 1,
+    },
+  ],
+};
+
+export default sectionData;

@@ -1,0 +1,74 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '4-4-1',
+  unitId: 'unit4',
+  chapterId: 'ch4-4',
+  title: '第一节 流动的组织—血液',
+  learningGoals: [
+    '描述血液的组成',
+    '说明血浆和血细胞的功能',
+  ],
+  knowledgePoints: [
+    {
+      id: '4-4-1-k1',
+      title: '一、血液的组成',
+      content: '血液由<strong>血浆</strong>和<strong>血细胞</strong>组成：<br/><br/><strong>血浆</strong>（约55%）：<br/>• 成分：水（约90%）、血浆蛋白、葡萄糖、氨基酸、无机盐等<br/>• 功能：<strong>运载血细胞，运输养料和废物</strong><br/><br/><strong>血细胞</strong>（约45%）：<br/>• <strong>红细胞</strong>：运输氧气<br/>• <strong>白细胞</strong>：防御和保护<br/>• <strong>血小板</strong>：止血和凝血',
+      keyTerms: ['血浆', '血细胞', '红细胞', '白细胞', '血小板'],
+      children: [],
+    },
+    {
+      id: '4-4-1-k2',
+      title: '二、红细胞',
+      content: '红细胞（RBC）：<br/>• 数量：最多（男性约5.0×10¹²/L，女性约4.2×10¹²/L）<br/>• 形态：<strong>双面凹的圆饼状</strong>，成熟后<strong>无细胞核</strong><br/>• 特点：富含<strong>血红蛋白</strong>（Hb，红色，能结合和运输氧气）<br/>• 功能：<strong>运输氧气</strong>（部分二氧化碳）<br/>• 异常：红细胞数量过少或血红蛋白含量过低 → <strong>贫血</strong>',
+      keyTerms: ['红细胞', '血红蛋白', '双面凹', '贫血', '运输氧气'],
+      children: [],
+    },
+    {
+      id: '4-4-1-k3',
+      title: '三、白细胞和血小板',
+      content: '<strong>白细胞</strong>（WBC）：<br/>• 数量：最少（但种类多）<br/>• 形态：有细胞核，体积最大<br/>• 功能：<strong>防御和保护</strong>（吞噬病菌、产生抗体）<br/>• 异常：数量增多 → 可能体内有炎症<br/><br/><strong>血小板</strong>（PLT）：<br/>• 形态：<strong>无细胞核</strong>，形态不规则（细胞碎片）<br/>• 功能：<strong>止血和凝血</strong><br/>• 异常：数量过少 → 止血困难；过多 → 易形成血栓',
+      keyTerms: ['白细胞', '血小板', '防御', '止血', '凝血', '炎症'],
+      children: [],
+    },
+  ],
+  exercises: [
+    {
+      id: '4-4-1-ex1',
+      type: 'true-false',
+      question: '红细胞有细胞核，能运输氧气。',
+      answer: '错误',
+      explanation: '成熟的红细胞没有细胞核（更高效的运输氧气），富含血红蛋白，功能是运输氧气。',
+      difficulty: 1,
+    },
+    {
+      id: '4-4-1-ex2',
+      type: 'single-choice',
+      question: '血液中哪种血细胞有细胞核且能吞噬病菌？',
+      options: ['A. 红细胞', 'B. 白细胞', 'C. 血小板', 'D. 血浆蛋白'],
+      answer: 'B',
+      explanation: '白细胞有细胞核，能吞噬病菌、产生抗体，具有防御和保护功能。红细胞和血小板成熟后无细胞核。',
+      difficulty: 1,
+    },
+    {
+      id: '4-4-1-ex3',
+      type: 'single-choice',
+      question: '当人体出现炎症时，血液中哪种血细胞的数量会明显增多？',
+      options: ['A. 红细胞', 'B. 白细胞', 'C. 血小板', 'D. 血红蛋白'],
+      answer: 'B',
+      explanation: '白细胞具有防御和保护功能，当身体出现炎症（感染）时，白细胞数量会增多，以吞噬病菌。',
+      difficulty: 1,
+    },
+    {
+      id: '4-4-1-ex4',
+      type: 'multi-choice',
+      question: '下列关于血液成分的说法，正确的是？（多选）',
+      options: ['A. 血浆能运输养料和废物', 'B. 红细胞能运输氧气', 'C. 白细胞能吞噬病菌', 'D. 血小板能促进凝血'],
+      answer: ['A', 'B', 'C', 'D'],
+      explanation: '血浆运载血细胞、运输养料和废物；红细胞运输氧气；白细胞吞噬病菌、防御保护；血小板止血和凝血。四个选项都正确。',
+      difficulty: 1,
+    },
+  ],
+};
+
+export default sectionData;

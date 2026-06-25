@@ -1,0 +1,91 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '3-2-1',
+  unitId: 'unit3',
+  chapterId: 'ch3-2',
+  title: '第一节 水的利用与散失',
+  learningGoals: [
+    '描述植物体吸收的水在体内运输的途径',
+    '说明蒸腾作用的过程和意义',
+    '描述叶片的结构与功能',
+  ],
+  knowledgePoints: [
+    {
+      id: '3-2-1-k1',
+      title: '一、植物对水的吸收和运输',
+      content: '植物主要通过<strong>根尖成熟区</strong>吸收水。根吸收的水通过<strong>导管</strong>（输导组织）运输到茎、叶、花等器官。<br/><br/>导管是由许多长形、管状的死细胞构成的，上下细胞间的细胞壁消失，形成中空的管道，溶解在水中的<strong>无机盐也随水一起运输</strong>。',
+      keyTerms: ['根尖', '成熟区', '导管', '输导组织', '无机盐'],
+      children: [],
+    },
+    {
+      id: '3-2-1-k2',
+      title: '二、蒸腾作用',
+      content: '<strong>蒸腾作用</strong>：水从活的植物体表面以<strong>水蒸气状态</strong>散失到大气中的过程。<br/><br/>植物吸收的水，只有<strong>约1%</strong>被自身利用（光合作用等），<strong>约99%</strong>通过蒸腾作用散失。<br/><br/><strong>蒸腾作用的意义</strong>：<br/>1. 拉动水和无机盐在体内运输<br/>2. 降低叶片表面温度，避免被高温灼伤<br/>3. 参与生物圈的水循环',
+      keyTerms: ['蒸腾作用', '水蒸气', '拉动运输', '降低温度'],
+      children: [],
+    },
+    {
+      id: '3-2-1-k3',
+      title: '三、叶片的结构',
+      content: '叶片由<strong>表皮、叶肉、叶脉</strong>三部分组成：<br/><br/>• <strong>表皮</strong>：上表皮和下表皮，排列紧密，保护作用<br/>• <strong>叶肉</strong>：含大量叶绿体，是光合作用的场所<br/>• <strong>叶脉</strong>：内有导管和筛管，运输水和有机物<br/><br/><strong>气孔</strong>：由一对<strong>保卫细胞</strong>围成的小孔，是蒸腾作用的"门户"，也是气体交换的"窗口"。',
+      keyTerms: ['表皮', '叶肉', '叶脉', '气孔', '保卫细胞'],
+      children: [
+        {
+          id: '3-2-1-k3-1',
+          title: '气孔的开闭',
+          content: '保卫细胞吸水膨胀→气孔<strong>张开</strong>（白天，光合作用需要CO₂）<br/>保卫细胞失水收缩→气孔<strong>闭合</strong>（夜晚，蒸腾作用减弱）',
+          keyTerms: ['张开', '闭合', '保卫细胞'],
+        },
+      ],
+    },
+  ],
+  exercises: [
+    {
+      id: '3-2-1-ex1',
+      type: 'true-false',
+      question: '植物吸收的水大部分用于光合作用等生命活动，只有少部分通过蒸腾作用散失。',
+      answer: '错误',
+      explanation: '植物吸收的水，只有约1%被自身利用，约99%通过蒸腾作用散失。蒸腾作用对植物有重要意义。',
+      difficulty: 1,
+    },
+    {
+      id: '3-2-1-ex2',
+      type: 'single-choice',
+      question: '植物体内运输水和无机盐的管道是？',
+      options: ['A. 筛管', 'B. 导管', 'C. 气孔', 'D. 根毛'],
+      answer: 'B',
+      explanation: '导管是运输水和无机盐的管道，属于输导组织。筛管运输有机物。',
+      difficulty: 1,
+    },
+    {
+      id: '3-2-1-ex3',
+      type: 'single-choice',
+      question: '气孔的张开和闭合受什么细胞控制？',
+      options: ['A. 表皮细胞', 'B. 叶肉细胞', 'C. 保卫细胞', 'D. 导管细胞'],
+      answer: 'C',
+      explanation: '气孔是由一对半月形的保卫细胞围成的。保卫细胞吸水膨胀时气孔张开，失水收缩时气孔闭合。',
+      difficulty: 1,
+    },
+    {
+      id: '3-2-1-ex4',
+      type: 'single-choice',
+      question: '取同一植株大小相同的两根枝条，A保留叶片，B摘除叶片，插入盛有等量清水的试管中，向试管滴油铺满水面。24小时后，哪支试管的液面下降更明显？',
+      options: ['A. A试管', 'B. B试管', 'C. 一样多', 'D. 无法判断'],
+      answer: 'A',
+      explanation: 'A试管保留叶片，蒸腾作用强，水散失多，液面下降更明显。B试管摘除叶片，蒸腾作用弱，水散失少。滴油是为了防止水直接蒸发。',
+      difficulty: 2,
+    },
+    {
+      id: '3-2-1-ex5',
+      type: 'multi-choice',
+      question: '蒸腾作用对植物的意义包括？（多选）',
+      options: ['A. 拉动水和无机盐运输', 'B. 降低叶片温度', 'C. 参与水循环', 'D. 为光合作用提供水'],
+      answer: ['A', 'B', 'C'],
+      explanation: '蒸腾作用的意义：拉动水和无机盐在体内运输、降低叶片表面温度、参与生物圈的水循环。D选项不准确，光合作用的水直接来自细胞。',
+      difficulty: 2,
+    },
+  ],
+};
+
+export default sectionData;

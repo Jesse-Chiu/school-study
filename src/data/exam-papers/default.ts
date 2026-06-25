@@ -1,0 +1,64 @@
+import type { ExamPaper } from './types';
+
+/**
+ * 期末模拟测试 - 40道题（默认试卷）
+ * 覆盖：第三单元（植物的生活）+ 第四单元（人体生理与健康）
+ * 题型分布：判断题10 + 单选题20 + 多选题5 + 填空题5
+ */
+export const defaultExam: ExamPaper = {
+  meta: {
+    id: 'default',
+    title: '期末综合模拟测试',
+    subject: '生物',
+    timeLimit: 60 * 60,
+    totalScore: 100,
+    questionCount: 40,
+    description: '涵盖七年级下册全部知识点，检验学习效果',
+  },
+  exercises: [
+    // ============ 判断题（1-10）============
+    { id: 'm-1', type: 'true-false', question: '种子萌发时，胚根先突破种皮。', answer: true, explanation: '种子萌发过程中，胚根最先突破种皮，发育成根。', knowledgePoint: '种子的萌发' },
+    { id: 'm-2', type: 'true-false', question: '根吸收水分的主要部位是根尖的成熟区。', answer: true, explanation: '成熟区有大量根毛，增大了吸收面积，是根吸收水分和无机盐的主要部位。', knowledgePoint: '植株的生长' },
+    { id: 'm-3', type: 'true-false', question: '花的结构中，雄蕊和雌蕊是最重要的结构。', answer: true, explanation: '雄蕊和雌蕊与果实和种子的形成有直接关系，是最重要的结构。', knowledgePoint: '开花和结果' },
+    { id: 'm-4', type: 'true-false', question: '蒸腾作用散失大量水分，对植物有害无利。', answer: false, explanation: '蒸腾作用虽然散失水分，但能促进水盐运输、降低叶片温度，对植物有重要意义。', knowledgePoint: '蒸腾作用' },
+    { id: 'm-5', type: 'true-false', question: '光合作用的实质是合成有机物，储存能量。', answer: true, explanation: '光合作用利用光能将二氧化碳和水合成有机物，并将光能储存在有机物中。', knowledgePoint: '光合作用' },
+    { id: 'm-6', type: 'true-false', question: '呼吸作用只在晚上进行。', answer: false, explanation: '呼吸作用全天都能进行，只要有生命活动的部位就在进行呼吸作用。', knowledgePoint: '呼吸作用' },
+    { id: 'm-7', type: 'true-false', question: '受精卵的形成标志着新生命的开始。', answer: true, explanation: '精子和卵细胞结合形成受精卵，受精卵是人体发育的起点。', knowledgePoint: '人的生殖' },
+    { id: 'm-8', type: 'true-false', question: '糖类是人体最重要的供能物质。', answer: true, explanation: '人体生命活动的能量主要由糖类提供，糖类是最重要的供能物质。', knowledgePoint: '食物中的营养物质' },
+    { id: 'm-9', type: 'true-false', question: '动脉中流动脉血，静脉中流静脉血。', answer: false, explanation: '肺动脉中流静脉血，肺静脉中流动脉血。动脉/静脉是按血流方向划分的。', knowledgePoint: '血液与血管' },
+    { id: 'm-10', type: 'true-false', question: '肾小球的作用是对血液进行过滤，形成原尿。', answer: true, explanation: '血液流经肾小球时，除血细胞和大分子蛋白质外，部分水、无机盐、葡萄糖、尿素过滤到肾小囊中形成原尿。', knowledgePoint: '人体废物的排出' },
+    // ============ 单选题（11-30）============
+    { id: 'm-11', type: 'single-choice', question: '下列哪项不是种子萌发所需的环境条件？', options: ['适宜的温度', '一定的水分', '充足的空气', '强烈的光照'], answer: 3, explanation: '光照不是种子萌发的必要条件（少数种子除外）。', knowledgePoint: '种子的萌发' },
+    { id: 'm-12', type: 'single-choice', question: '一朵花中，能发育成果实的结构是？', options: ['雄蕊', '雌蕊', '子房', '花瓣'], answer: 2, explanation: '子房发育成果实，子房壁发育成果皮，胚珠发育成种子。', knowledgePoint: '开花和结果' },
+    { id: 'm-13', type: 'single-choice', question: '光合作用的原料是？', options: ['有机物和氧气', '二氧化碳和水', '二氧化碳和氧气', '有机物和水'], answer: 1, explanation: '光合作用的原料是二氧化碳和水，产物是有机物和氧气。', knowledgePoint: '光合作用' },
+    { id: 'm-14', type: 'single-choice', question: '植物体内的水分以气体状态散失到体外的过程叫？', options: ['吸收作用', '蒸腾作用', '光合作用', '呼吸作用'], answer: 1, explanation: '蒸腾作用是指水分以水蒸气形式从植物体内散失到体外的过程。', knowledgePoint: '蒸腾作用' },
+    { id: 'm-15', type: 'single-choice', question: '呼吸作用的公式是？', options: ['二氧化碳 + 水 → 有机物 + 氧气', '有机物 + 氧气 → 二氧化碳 + 水 + 能量', '水 + 二氧化碳 → 有机物', '氧气 + 水 → 有机物 + 二氧化碳'], answer: 1, explanation: '呼吸作用的公式：有机物 + 氧气 → 二氧化碳 + 水 + 能量（在线粒体中）。', knowledgePoint: '呼吸作用' },
+    { id: 'm-16', type: 'single-choice', question: '精子和卵细胞结合的场所是？', options: ['卵巢', '输卵管', '子宫', '阴道'], answer: 1, explanation: '受精作用发生在输卵管中。', knowledgePoint: '人的生殖' },
+    { id: 'm-17', type: 'single-choice', question: '人体发育的起点是？', options: ['婴儿', '受精卵', '胚胎', '卵细胞'], answer: 1, explanation: '受精卵的形成标志着新生命的开始。', knowledgePoint: '人的生殖' },
+    { id: 'm-18', type: 'single-choice', question: '下列哪项是胎儿与母体交换物质的器官？', options: ['子宫', '胎盘', '卵巢', '输卵管'], answer: 1, explanation: '胎盘是胎儿与母体交换物质的器官。', knowledgePoint: '人的生殖' },
+    { id: 'm-19', type: 'single-choice', question: '人体消化食物和吸收营养物质的主要器官是？', options: ['口腔', '胃', '小肠', '大肠'], answer: 2, explanation: '小肠是消化和吸收的主要场所。', knowledgePoint: '消化和吸收' },
+    { id: 'm-20', type: 'single-choice', question: '人体内最大的消化腺是？', options: ['唾液腺', '胃腺', '肝脏', '肠腺'], answer: 2, explanation: '肝脏是人体最大的消化腺，能分泌胆汁。', knowledgePoint: '消化和吸收' },
+    { id: 'm-21', type: 'single-choice', question: '呼吸系统中，进行气体交换的场所是？', options: ['鼻腔', '气管', '肺', '咽喉'], answer: 2, explanation: '肺是呼吸系统的主要器官，是进行气体交换的场所。', knowledgePoint: '人体的呼吸' },
+    { id: 'm-22', type: 'single-choice', question: '血液中数量最多、负责运输氧气的细胞是？', options: ['红细胞', '白细胞', '血小板', '血浆'], answer: 0, explanation: '红细胞中含有血红蛋白，能运输氧气，是血液中数量最多的细胞。', knowledgePoint: '血液' },
+    { id: 'm-23', type: 'single-choice', question: '心脏四个腔中，壁最厚的是？', options: ['左心房', '左心室', '右心房', '右心室'], answer: 1, explanation: '左心室要将血液泵至全身，输送距离最远，所以肌肉壁最厚。', knowledgePoint: '心脏的结构与功能' },
+    { id: 'm-24', type: 'single-choice', question: '体循环的起点是？', options: ['左心房', '左心室', '右心房', '右心室'], answer: 1, explanation: '体循环：左心室→主动脉→全身→右心房。', knowledgePoint: '血液循环' },
+    { id: 'm-25', type: 'single-choice', question: '肾脏结构和功能的基本单位是？', options: ['肾小球', '肾小管', '肾单位', '集合管'], answer: 2, explanation: '肾单位是肾脏结构和功能的基本单位。', knowledgePoint: '人体废物的排出' },
+    { id: 'm-26', type: 'single-choice', question: '原尿与血浆相比，不含哪种物质？', options: ['葡萄糖', '尿素', '大分子蛋白质', '水'], answer: 2, explanation: '肾小球的过滤作用不能过滤大分子蛋白质，所以原尿中不含大分子蛋白质。', knowledgePoint: '尿的形成' },
+    { id: 'm-27', type: 'single-choice', question: '青春期最显著的特点是？', options: ['身高突增', '体重减少', '性器官停止发育', '学习能力下降'], answer: 0, explanation: '身高突增是青春期的一个显著特点。', knowledgePoint: '青春期' },
+    { id: 'm-28', type: 'single-choice', question: '平时我们所说的"蓝鲸"是？', options: ['鱼类', '哺乳类', '两栖类', '鸟类'], answer: 1, explanation: '蓝鲸虽然生活在水中，但用肺呼吸，胎生哺乳，属于哺乳动物。', knowledgePoint: '拓展知识' },
+    { id: 'm-29', type: 'single-choice', question: '下列哪种维生素缺乏会患夜盲症？', options: ['维生素A', '维生素B1', '维生素C', '维生素D'], answer: 0, explanation: '缺乏维生素A会患夜盲症（傍晚看不清东西）。', knowledgePoint: '食物中的营养物质' },
+    { id: 'm-30', type: 'single-choice', question: '人体呼出的气体与吸入的气体相比，含量增加的是？', options: ['氧气', '二氧化碳', '氮气', '氢气'], answer: 1, explanation: '人体呼吸消耗氧气，产生二氧化碳，所以呼出气体中二氧化碳含量增加。', knowledgePoint: '人体的呼吸' },
+    // ============ 多选题（31-35）============
+    { id: 'm-31', type: 'multi-choice', question: '下列哪些是种子萌发所需的条件？（多选）', options: ['适宜的温度', '一定的水分', '充足的空气', '死亡的种子也能萌发'], answer: [0, 1, 2], explanation: '种子萌发需要适宜温度、一定水分、充足空气（环境条件）和活的胚（自身条件）。', knowledgePoint: '种子的萌发' },
+    { id: 'm-32', type: 'multi-choice', question: '下列哪些是光合作用的实质？（多选）', options: ['合成有机物', '储存能量', '分解有机物', '释放氧气'], answer: [0, 1, 3], explanation: '光合作用的实质是合成有机物、储存能量、释放氧气。分解有机物是呼吸作用的实质。', knowledgePoint: '光合作用' },
+    { id: 'm-33', type: 'multi-choice', question: '下列哪些是青春期的正常生理现象？（多选）', options: ['身高突增', '男孩子出现遗精', '女孩子来月经', '食欲完全消失'], answer: [0, 1, 2], explanation: '青春期身高突增，男孩出现遗精，女孩来月经，都是正常的生理现象。', knowledgePoint: '青春期' },
+    { id: 'm-34', type: 'multi-choice', question: '下列哪些是毛细血管适于物质交换的特点？（多选）', options: ['管径小，只允许红细胞单行通过', '管壁薄，只有一层上皮细胞', '血流速度快', '数量多，分布广'], answer: [0, 1, 3], explanation: '毛细血管管径小、壁薄、数量多、分布广、血流慢，这些特点有利于物质交换。', knowledgePoint: '血管' },
+    { id: 'm-35', type: 'multi-choice', question: '下列哪些是合理营养的原则？（多选）', options: ['营养素种类齐全', '营养素摄入量合适', '每日三餐，按时进餐', '只吃自己喜欢的食物'], answer: [0, 1, 2], explanation: '合理营养是指全面而平衡的营养，要种类齐全、量合适、三餐按时。不能偏食。', knowledgePoint: '合理营养与食品安全' },
+    // ============ 填空题（36-40）============
+    { id: 'm-36', type: 'fill-blank', question: '光合作用的原料是___和___，条件是___，场所是___，产物是___和___。', answer: ['二氧化碳', '水', '光', '叶绿体', '有机物', '氧气'], explanation: '光合作用是七年级下册最重要的知识点之一，必须掌握公式和各部分含义。', knowledgePoint: '光合作用' },
+    { id: 'm-37', type: 'fill-blank', question: '尿的形成包括___和___两个过程。原尿中不含___和大分子___。', answer: ['肾小球滤过', '肾小管重吸收', '血细胞', '蛋白质'], explanation: '理解尿液形成过程的关键是区分"过滤"和"重吸收"两个过程。', knowledgePoint: '人体废物的排出' },
+    { id: 'm-38', type: 'fill-blank', question: '移栽时剪去部分枝叶是为了降低___作用，减少___散失，提高成活率。', answer: ['蒸腾', '水分'], explanation: '这是蒸腾作用知识在农业生产中的应用，是重要的考点。', knowledgePoint: '蒸腾作用' },
+    { id: 'm-39', type: 'fill-blank', question: '体循环：___→主动脉→全身毛细血管→上、下腔静脉→___。血液从___血变为___血。', answer: ['左心室', '右心房', '动脉', '静脉'], explanation: '体循环的路径和血液成分变化是循环系统的核心考点。', knowledgePoint: '血液循环' },
+    { id: 'm-40', type: 'fill-blank', question: '小肠长约___米，内表面有___和___，大大增强了吸收面积。消化液有___、___和___。', answer: ['5–6', '环形皱襞', '小肠绒毛', '肠液', '胰液', '胆汁'], explanation: '结构与功能相适应是生物学的重要思想，小肠的结构特点充分体现了这一点。', knowledgePoint: '消化和吸收' },
+  ],
+};

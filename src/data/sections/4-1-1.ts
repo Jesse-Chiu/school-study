@@ -1,0 +1,83 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '4-1-1',
+  unitId: 'unit4',
+  chapterId: 'ch4-1',
+  title: '第一节 人的生殖',
+  learningGoals: [
+    '描述男性和女性生殖系统的主要结构和功能',
+    '描述受精的过程',
+    '描述胚胎发育的大致过程',
+  ],
+  knowledgePoints: [
+    {
+      id: '4-1-1-k1',
+      title: '一、男性生殖系统',
+      content: '主要器官：<strong>睾丸</strong><br/>• 功能：产生<strong>精子</strong>，分泌<strong>雄激素</strong><br/>• 输送：附睾（储存输送精子）→ 输精管 → 尿道 → 体外<br/><br/>其他结构：精囊腺、前列腺（分泌黏液，组成精液）',
+      keyTerms: ['睾丸', '精子', '雄激素', '附睾', '输精管'],
+      children: [],
+    },
+    {
+      id: '4-1-1-k2',
+      title: '二、女性生殖系统',
+      content: '主要器官：<strong>卵巢</strong><br/>• 功能：产生<strong>卵细胞</strong>，分泌<strong>雌激素</strong>等<br/><br/>其他结构：<br/>• <strong>输卵管</strong>：输送卵细胞，<strong>受精的场所</strong><br/>• <strong>子宫</strong>：<strong>胚胎发育的场所</strong><br/>• <strong>阴道</strong>：精子进入和胎儿产出的通道',
+      keyTerms: ['卵巢', '卵细胞', '雌激素', '输卵管', '子宫', '阴道', '受精场所'],
+      children: [],
+    },
+    {
+      id: '4-1-1-k3',
+      title: '三、生殖过程',
+      content: '<strong>受精</strong>：精子与卵细胞在<strong>输卵管</strong>内结合形成<strong>受精卵</strong>。<br/><br/><strong>胚胎发育</strong>：<br/>1. 受精卵分裂 → 胚泡<br/>2. 胚泡植入<strong>子宫内膜</strong>（怀孕开始）<br/>3. 胚泡发育成<strong>胚胎</strong>（8周左右发育成胎儿）<br/>4. 胎儿通过<strong>胎盘、脐带</strong>从母体获得营养和氧气，排出废物<br/>5. 约<strong>38周</strong>（266天）后分娩<br/><br/><strong>试管婴儿</strong>：精子和卵细胞在体外受精，胚胎移植回母体子宫发育。',
+      keyTerms: ['受精', '受精卵', '胚泡', '子宫内膜', '胚胎', '胎儿', '胎盘', '脐带', '试管婴儿'],
+      children: [],
+    },
+  ],
+  exercises: [
+    {
+      id: '4-1-1-ex1',
+      type: 'true-false',
+      question: '子宫是胚胎发育的场所，所以子宫是女性的主要生殖器官。',
+      answer: '错误',
+      explanation: '女性的主要生殖器官是卵巢（产生卵细胞和分泌激素）。子宫是胚胎发育的场所，但不是主要生殖器官。主要生殖器官是指能够产生生殖细胞的器官。',
+      difficulty: 2,
+    },
+    {
+      id: '4-1-1-ex2',
+      type: 'single-choice',
+      question: '精子和卵细胞结合（受精）的场所是？',
+      options: ['A. 卵巢', 'B. 输卵管', 'C. 子宫', 'D. 阴道'],
+      answer: 'B',
+      explanation: '受精作用在输卵管内完成。卵细胞从卵巢排出后进入输卵管，精子通过阴道、子宫进入输卵管，与卵细胞结合形成受精卵。',
+      difficulty: 1,
+    },
+    {
+      id: '4-1-1-ex3',
+      type: 'single-choice',
+      question: '胎儿与母体进行物质交换的器官是？',
+      options: ['A. 子宫内膜', 'B. 胎盘', 'C. 脐带', 'D. 羊水'],
+      answer: 'B',
+      explanation: '胎儿通过胎盘、脐带从母体获得营养物质和氧气，同时将二氧化碳等代谢废物通过脐带、胎盘经母体排出。胎盘是物质交换的器官。',
+      difficulty: 1,
+    },
+    {
+      id: '4-1-1-ex4',
+      type: 'single-choice',
+      question: '男性产生精子和分泌雄激素的器官是？',
+      options: ['A. 附睾', 'B. 输精管', 'C. 睾丸', 'D. 前列腺'],
+      answer: 'C',
+      explanation: '睾丸是男性的主要生殖器官，功能是产生精子和分泌雄激素。附睾储存和输送精子，输精管输送精子，前列腺分泌黏液。',
+      difficulty: 1,
+    },
+    {
+      id: '4-1-1-ex5',
+      type: 'fill-blank',
+      question: '受精卵在___中形成，移动到___并植入内膜。约___周后发育成胎儿，通过___和___从母体获得营养。',
+      answer: ['输卵管', '子宫', '8', '胎盘', '脐带'],
+      explanation: '生殖过程是：受精→分裂→胚泡→植入→胚胎→胎儿→分娩。每个阶段都有重要的生理意义。',
+      difficulty: 2,
+    },
+  ],
+};
+
+export default sectionData;

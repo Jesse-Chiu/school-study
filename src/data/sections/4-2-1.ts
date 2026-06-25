@@ -1,0 +1,82 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '4-2-1',
+  unitId: 'unit4',
+  chapterId: 'ch4-2',
+  title: '第一节 食物中的营养物质',
+  learningGoals: [
+    '说出人体需要的主要营养物质',
+    '说明各类营养物质的作用',
+  ],
+  knowledgePoints: [
+    {
+      id: '4-2-1-k1',
+      title: '一、食物中的六大营养物质',
+      content: '食物中含有<strong>六类</strong>营养物质：<br/><br/>• <strong>糖类</strong>：主要<strong>能源物质</strong><br/>• <strong>脂肪</strong>：备用能源物质（储存在体内）<br/>• <strong>蛋白质</strong>：构成细胞的基本物质，生长发育、受损细胞修复和更新都离不开<br/>• <strong>水</strong>：细胞的主要成分，约占体重60%～70%<br/>• <strong>无机盐</strong>：含量少但作用大<br/>• <strong>维生素</strong>：需要量小，但不可缺少',
+      keyTerms: ['糖类', '脂肪', '蛋白质', '水', '无机盐', '维生素', '能源物质'],
+      children: [],
+    },
+    {
+      id: '4-2-1-k2',
+      title: '二、无机盐的作用',
+      content: '• <strong>含钙</strong>：构成骨骼和牙齿（儿童缺钙→佝偻病；中老年人缺钙→骨质疏松）<br/>• <strong>含铁</strong>：构成血红蛋白（缺铁→贫血）<br/>• <strong>含碘</strong>：合成甲状腺激素（缺碘→地方性甲状腺肿/大脖子病）<br/>• <strong>含锌</strong>：影响生长发育',
+      keyTerms: ['钙', '铁', '碘', '锌', '佝偻病', '贫血', '甲状腺肿'],
+      children: [],
+    },
+    {
+      id: '4-2-1-k3',
+      title: '三、维生素的作用',
+      content: '• <strong>维生素A</strong>：促进生长发育，增强抵抗力（缺乏→夜盲症、干眼症）<br/>• <strong>维生素B₁</strong>：维持神经系统正常功能（缺乏→神经炎、脚气病）<br/>• <strong>维生素C</strong>：增强抵抗力（缺乏→坏血病、牙龈出血）<br/>• <strong>维生素D</strong>：促进钙和磷的吸收（缺乏→佝偻病、骨质疏松）<br/><br/>维生素D能促进钙的吸收，所以补钙时最好同时补充维生素D。',
+      keyTerms: ['维生素A', '维生素C', '维生素D', '夜盲症', '坏血病', '佝偻病'],
+      children: [],
+    },
+  ],
+  exercises: [
+    {
+      id: '4-2-1-ex1',
+      type: 'true-false',
+      question: '维生素对人体非常重要，所以需要多吃维生素药片来补充。',
+      answer: '错误',
+      explanation: '维生素需要量很小，正常饮食就能满足需求。过量服用维生素药片反而可能对身体有害。应通过均衡饮食获取维生素。',
+      difficulty: 2,
+    },
+    {
+      id: '4-2-1-ex2',
+      type: 'single-choice',
+      question: '牛奶中含量丰富，能促进骨骼和牙齿发育的无机盐是？',
+      options: ['A. 含铁的无机盐', 'B. 含钙的无机盐', 'C. 含碘的无机盐', 'D. 含锌的无机盐'],
+      answer: 'B',
+      explanation: '钙是构成骨骼和牙齿的主要成分，牛奶、豆制品中钙含量丰富。维生素D能促进钙的吸收。',
+      difficulty: 1,
+    },
+    {
+      id: '4-2-1-ex3',
+      type: 'single-choice',
+      question: '多吃动物肝脏可以预防夜盲症，主要是因为肝脏富含？',
+      options: ['A. 维生素A', 'B. 维生素B₁', 'C. 维生素C', 'D. 维生素D'],
+      answer: 'A',
+      explanation: '维生素A缺乏会导致夜盲症。动物肝脏、胡萝卜（含胡萝卜素，可转化为维生素A）富含维生素A。',
+      difficulty: 1,
+    },
+    {
+      id: '4-2-1-ex4',
+      type: 'multi-choice',
+      question: '下列哪些症状是由于缺乏维生素引起的？（多选）',
+      options: ['A. 夜盲症', 'B. 坏血病', 'C. 贫血', 'D. 佝偻病'],
+      answer: ['A', 'B', 'D'],
+      explanation: '夜盲症（缺维生素A）、坏血病（缺维生素C）、佝偻病（缺维生素D或钙）。贫血是由于缺铁（无机盐）引起的，不是缺乏维生素。',
+      difficulty: 2,
+    },
+    {
+      id: '4-2-1-ex5',
+      type: 'fill-blank',
+      question: '___是构成细胞的基本物质，用于生长发育和修复；___是备用能源物质。只吃水果蔬菜会导致___和___摄入不足。',
+      answer: ['蛋白质', '脂肪', '蛋白质', '脂肪'],
+      explanation: '六大营养物质各有重要作用，不能偏废。减肥应通过合理膳食和适当锻炼，而不是极端节食。',
+      difficulty: 2,
+    },
+  ],
+};
+
+export default sectionData;

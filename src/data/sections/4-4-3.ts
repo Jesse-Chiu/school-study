@@ -1,0 +1,73 @@
+import type { SectionData } from '@/lib/types';
+
+const sectionData: SectionData = {
+  id: '4-4-3',
+  unitId: 'unit4',
+  chapterId: 'ch4-4',
+  title: '第三节 输送血液的泵—心脏',
+  learningGoals: [
+    '描述心脏的结构和功能',
+    '描述血液循环的途径',
+  ],
+  knowledgePoints: [
+    {
+      id: '4-4-3-k1',
+      title: '一、心脏的结构',
+      content: '心脏位于胸腔中部偏<strong>左下方</strong>，由<strong>心肌</strong>构成，是<strong>血液循环的动力器官</strong>。<br/><br/>心脏有<strong>四个腔</strong>：<br/>• <strong>左心房</strong>：接肺静脉（回心，充氧血）<br/>• <strong>左心室</strong>：接主动脉（泵出，<strong>心肌最发达</strong>）<br/>• <strong>右心房</strong>：接上下腔静脉（回心，缺氧血）<br/>• <strong>右心室</strong>：接肺动脉（泵出）<br/><br/>心脏内有<strong>瓣膜</strong>（房室瓣、动脉瓣），防止血液<strong>倒流</strong>。',
+      keyTerms: ['心脏', '四腔', '左心房', '左心室', '右心房', '右心室', '瓣膜', '心肌最发达'],
+      children: [],
+    },
+    {
+      id: '4-4-3-k2',
+      title: '二、血液循环的途径',
+      content: '<strong>体循环</strong>（从左心出发，回到右心）：<br/>左心室 → 主动脉 → 全身各级动脉 → 全身毛细血管 → 全身各级静脉 → 上、下腔静脉 → 右心房<br/>结果：<strong>动脉血 → 静脉血</strong>（放出氧气和养料，回收二氧化碳和废物）<br/><br/><strong>肺循环</strong>（从右心出发，回到左心）：<br/>右心室 → 肺动脉 → 肺部毛细血管 → 肺静脉 → 左心房<br/>结果：<strong>静脉血 → 动脉血</strong>（放出二氧化碳，回收氧气）',
+      keyTerms: ['体循环', '肺循环', '主动脉', '肺动脉', '肺静脉', '上腔静脉', '下腔静脉'],
+      children: [],
+    },
+    {
+      id: '4-4-3-k3',
+      title: '三、冠脉循环',
+      content: '冠状动脉→心脏自身毛细血管→冠状静脉→右心房<br/>意义：为<strong>心肌</strong>提供氧气和营养物质，并运走废物。<br/><br/>冠脉循环障碍可能导致<strong>冠心病、心肌梗死</strong>。',
+      keyTerms: ['冠脉循环', '冠状动脉', '冠心病', '心肌梗死'],
+      children: [],
+    },
+  ],
+  exercises: [
+    {
+      id: '4-4-3-ex1',
+      type: 'true-false',
+      question: '左心室的壁比右心室的壁厚，是因为左心室需要将血液泵送到全身。',
+      answer: '正确',
+      explanation: '左心室需要将血液泵送到全身各处（距离最远、压力最大），因此心肌最发达、壁最厚。右心室只需将血液泵到肺部（距离近、压力小），壁较薄。',
+      difficulty: 1,
+    },
+    {
+      id: '4-4-3-ex2',
+      type: 'single-choice',
+      question: '体循环结束时，血液进入心脏的哪个腔？',
+      options: ['A. 左心房', 'B. 左心室', 'C. 右心房', 'D. 右心室'],
+      answer: 'C',
+      explanation: '体循环：左心室→主动脉→全身→上、下腔静脉→右心房。所以体循环结束时血液进入右心房。',
+      difficulty: 2,
+    },
+    {
+      id: '4-4-3-ex3',
+      type: 'single-choice',
+      question: '肺循环的结果是？',
+      options: ['A. 静脉血变成动脉血', 'B. 动脉血变成静脉血', 'C. 氧气增多，二氧化碳也增多', 'D. 血液颜色变暗'],
+      answer: 'A',
+      explanation: '肺循环中，血液在肺部毛细血管与肺泡进行气体交换，放出二氧化碳、回收氧气，静脉血变成含氧丰富的动脉血。',
+      difficulty: 1,
+    },
+    {
+      id: '4-4-3-ex4',
+      type: 'fill-blank',
+      question: '体循环：___→主动脉→全身毛细血管→上、下腔静脉→___。肺循环：___→肺动脉→肺部毛细血管→肺静脉→___。',
+      answer: ['左心室', '右心房', '右心室', '左心房'],
+      explanation: '体循环负责将氧气和养料送到全身，肺循环负责在肺部进行气体交换（充氧、排二氧化碳）。两个循环相互连接，共同完成血液循环。',
+      difficulty: 3,
+    },
+  ],
+};
+
+export default sectionData;
