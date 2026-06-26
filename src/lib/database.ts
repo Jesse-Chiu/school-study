@@ -58,7 +58,7 @@ export const initDatabase = async (): Promise<any> => {
   if (dbInstance) return dbInstance;
   
   const SQL = await initSqlJs({
-    locateFile: () => `/sql-wasm.wasm`
+    locateFile: () => import.meta.env.BASE_URL + 'sql-wasm.wasm'
   });
   
   const existingData = await loadDatabase();
