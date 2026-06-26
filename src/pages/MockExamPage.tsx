@@ -500,10 +500,14 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
       </div>
 
       {/* ========== 题目卡片 ========== */}
-      <div className={`bg-white rounded-xl border-2 p-6 mb-6 ${
-        submitted ? (isCorrect ? 'border-emerald-200' : isUnanswered ? 'border-slate-200' : 'border-red-200') : 'border-slate-100'
+      <div className={`bg-white rounded-xl border-2 p-6 mb-6 transition-all ${
+        submitted ? (
+          isCorrect ? 'border-emerald-300 bg-emerald-50/20' :
+          isUnanswered ? 'border-slate-200' :
+          'border-red-400 bg-red-50/40 shadow-sm shadow-red-100'
+        ) : 'border-slate-100'
       }`}>
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
           <span className={`text-xs font-bold px-2 py-0.5 rounded ${
             currentEx.type === 'true-false' ? 'bg-sky-100 text-sky-700' :
             currentEx.type === 'single-choice' ? 'bg-emerald-100 text-emerald-700' :
@@ -511,10 +515,18 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
           }`}>{typeLabel(currentEx.type)}</span>
           <span className="text-xs text-slate-400">第{currentIndex + 1}题 / 共{TOTAL}题</span>
           {submitted && (
-            isUnanswered ? <span className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">未作答</span> :
-            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
-              {isCorrect ? '✅ 正确' : '❌ 错误'}
-            </span>
+            isUnanswered
+              ? <span className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">未作答</span>
+              : <span className={`text-xs font-bold px-3 py-1 rounded-full shadow-sm ${
+                  isCorrect
+                    ? 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200'
+                    : 'bg-red-100 text-red-700 ring-2 ring-red-300 animate-pulse'
+                }`}>
+                  {isCorrect ? '✅ 正确' : '❌ 答错'}
+                </span>
+          )}
+          {submitted && !isCorrect && !isUnanswered && (
+            <span className="text-xs font-medium text-red-500">（请查看下方红色选项）</span>
           )}
           {submitted && (
             <button onClick={() => handleToggleWrongBook(currentEx.id)} className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-50 text-slate-500 hover:bg-amber-50 hover:text-amber-600">
@@ -542,14 +554,14 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
                 ? 'bg-emerald-100 border-emerald-400 text-emerald-700 shadow-sm'
                 : 'bg-white border-slate-200 text-slate-600';
               if (!submitted) cls = selected ? cls : cls + ' hover:border-emerald-300';
-              if (submitted && isCorrectAns) cls = 'border-emerald-400 bg-emerald-50 text-emerald-700';
-              if (submitted && selected && !isCorrectAns) cls = 'border-red-400 bg-red-50 text-red-700';
+              if (submitted && isCorrectAns) cls = 'border-emerald-400 bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200';
+              if (submitted && selected && !isCorrectAns) cls = 'border-red-400 bg-red-100 text-red-800 font-medium ring-2 ring-red-200';
               return (
                 <button key={String(val)} onClick={() => !submitted && handleAnswer(currentEx.id, val)} disabled={submitted}
                   className={`flex-1 py-3 rounded-lg border text-sm font-medium transition-all flex flex-col items-center ${submitted ? 'cursor-default' : ''} ${cls}`}>
                   <span>{val ? '✅ 正确' : '❌ 错误'}</span>
                   {submitted && isCorrectAns && <span className="text-xs mt-0.5 text-emerald-600">✓ 正确答案</span>}
-                  {submitted && selected && !isCorrectAns && <span className="text-xs mt-0.5 text-red-600">✗ 你的选择</span>}
+                  {submitted && selected && !isCorrectAns && <span className="text-xs mt-0.5 text-red-600">✗ 你的选择（错误）</span>}
                 </button>
               );
             })}
@@ -566,15 +578,15 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
                 ? 'bg-emerald-100 border-emerald-400 text-emerald-700 shadow-sm'
                 : 'bg-white border-slate-200 text-slate-600';
               if (!submitted) cls = selected ? cls : cls + ' hover:border-emerald-300';
-              if (submitted && isCorrectAns) cls = 'border-emerald-400 bg-emerald-50 text-emerald-700';
-              if (submitted && selected && !isCorrectAns) cls = 'border-red-400 bg-red-50 text-red-700';
+              if (submitted && isCorrectAns) cls = 'border-emerald-400 bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200';
+              if (submitted && selected && !isCorrectAns) cls = 'border-red-400 bg-red-100 text-red-800 font-medium ring-2 ring-red-200 shadow-sm';
               return (
                 <button key={i} onClick={() => !submitted && handleAnswer(currentEx.id, i)} disabled={submitted}
                   className={`w-full text-left px-4 py-3 rounded-lg border text-sm transition-all flex items-center ${submitted ? 'cursor-default' : ''} ${cls}`}>
                   <span className="font-bold mr-2">{OPTION_LABELS[i]}.</span>
                   <span className="flex-1">{opt}</span>
-                  {submitted && isCorrectAns && <span className="text-xs font-bold text-emerald-600">✓ 正确答案</span>}
-                  {submitted && selected && !isCorrectAns && <span className="text-xs font-bold text-red-600">✗ 你的选择</span>}
+                  {submitted && isCorrectAns && <span className="text-xs font-bold text-emerald-600 ml-2">✓ 正确答案</span>}
+                  {submitted && selected && !isCorrectAns && <span className="text-xs font-bold text-red-600 ml-2">✗ 你的选择（错误）</span>}
                 </button>
               );
             })}
@@ -591,8 +603,8 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
                 ? 'bg-emerald-100 border-emerald-400 text-emerald-700 shadow-sm'
                 : 'bg-white border-slate-200 text-slate-600';
               if (!submitted) cls = selected ? cls : cls + ' hover:border-emerald-300';
-              if (submitted && isCorrectAns) cls = 'border-emerald-400 bg-emerald-50 text-emerald-700';
-              if (submitted && selected && !isCorrectAns) cls = 'border-red-400 bg-red-50 text-red-700';
+              if (submitted && isCorrectAns) cls = 'border-emerald-400 bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200';
+              if (submitted && selected && !isCorrectAns) cls = 'border-red-400 bg-red-100 text-red-800 font-medium ring-2 ring-red-200';
               return (
                 <button key={i} onClick={() => {
                   if (submitted) return;
@@ -603,8 +615,8 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
                   className={`w-full text-left px-4 py-3 rounded-lg border text-sm transition-all flex items-center ${submitted ? 'cursor-default' : ''} ${cls}`}>
                   <span className="font-bold mr-2">{OPTION_LABELS[i]}.</span>
                   <span className="flex-1">{opt}</span>
-                  {submitted && isCorrectAns && <span className="text-xs font-bold text-emerald-600">✓ 正确</span>}
-                  {submitted && selected && !isCorrectAns && <span className="text-xs font-bold text-red-600">✗ 你的选择</span>}
+                  {submitted && isCorrectAns && <span className="text-xs font-bold text-emerald-600 ml-2">✓ 正确</span>}
+                  {submitted && selected && !isCorrectAns && <span className="text-xs font-bold text-red-600 ml-2">✗ 你的选择（错误）</span>}
                 </button>
               );
             })}
