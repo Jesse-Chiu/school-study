@@ -37,7 +37,6 @@ print("Creating COS client...")
 config = CosConfig(Region=region, SecretId=sec_id, SecretKey=sec_key)
 client = CosS3Client(config)
 
-# MIME types for Content-Type
 MIME_TYPES = {
     ".html": "text/html; charset=utf-8",
     ".css": "text/css; charset=utf-8",
@@ -56,7 +55,7 @@ MIME_TYPES = {
     ".map": "application/json",
 }
 
-# Step 1: Delete ALL old files (clean deploy)
+# Step 1: Delete ALL old files
 print("Step 1: Cleaning old files from bucket...")
 deleted = 0
 try:
@@ -66,19 +65,25 @@ try:
         contents = resp.get("Contents") or []
         if not contents:
             break
-        to_delete = {"Object": [{"Key": o["Key"]} for o in contents]}
-        client.delete_objects(Bucket=bucket, Delete=to_delete)
-        deleted += len(contents)
+        keys = [o["Key"] for o in contents]
+        # Delete in batches of 100 (COS limit)
+        for i in range(0, len(keys), 100):
+            batch = keys[i:i+100]
+            to_delete = {"Object": [{"Key": k} for k in batch]}
+            client.delete_objects(Bucket=bucket, Delete=to_delete)
+            deleted += len(batch)
         if resp.get("IsTruncated") != "true":
             break
         marker = resp.get("NextMarker", "")
     print(f"  Deleted {deleted} old objects")
 except Exception as e:
     print(f"  Clean error (non-fatal): {e}")
+    traceback.print_exc()
 
 # Step 2: Upload dist/ with correct headers
-# Use put_object with Headers dict for reliable header control
-print("Step 2: Uploading files with correct headers...")
+# Use put_object_from_local_file with explicit ContentDisposition parameter
+# This is the COS SDK's native way to set the header
+print("Step 2: Uploading files...")
 dist_dir = "dist"
 uploaded = 0
 failed = 0
@@ -91,33 +96,30 @@ for root, _, files in os.walk(dist_dir):
         content_type = MIME_TYPES.get(ext, "application/octet-stream")
 
         try:
-            with open(local, 'rb') as f:
-                body = f.read()
-
-            # Set headers: Content-Disposition: inline (prevents forced download)
-            # Cache-Control: no-cache for HTML, long cache for assets
-            headers = {
-                "Content-Type": content_type,
-                "Content-Disposition": "inline",
+            # Use put_object_from_local_file with ContentDisposition='inline'
+            # This explicitly tells the browser to display, not download
+            extra_args = {
+                "ContentType": content_type,
+                "ContentDisposition": "inline",
             }
-            # HTML files: no cache (always fresh)
+            # HTML: no cache; assets: long cache
             if ext == ".html":
-                headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-            # Assets: long cache (1 year)
+                extra_args["CacheControl"] = "no-cache, no-store, must-revalidate"
             else:
-                headers["Cache-Control"] = "public, max-age=31536000, immutable"
+                extra_args["CacheControl"] = "public, max-age=31536000, immutable"
 
-            client.put_object(
+            client.put_object_from_local_file(
                 Bucket=bucket,
+                LocalFilePath=local,
                 Key=key,
-                Body=body,
-                Headers=headers,
+                **extra_args
             )
             uploaded += 1
             if uploaded % 20 == 0:
                 print(f"  Uploaded {uploaded} files...")
         except Exception as e:
             print(f"  FAILED: {key}: {e}")
+            traceback.print_exc()
             failed += 1
 
 print(f"Upload complete: {uploaded} succeeded, {failed} failed")
