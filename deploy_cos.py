@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deploy dist/ to Tencent COS bucket."""
+"""Deploy dist/ to Tencent COS bucket. Triggers via GitHub Actions."""
 import os
 import sys
 import traceback
