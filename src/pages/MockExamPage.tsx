@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Trophy, Clock, CheckCircle, RotateCcw, Bookmark, ChevronDown, ChevronUp, FileText, ChevronRight } from 'lucide-react';
-import { examPapers, getExamPaper, getExamList, type ExamPaper } from '../data/exam-papers';
+import { getExamPaper, getExamList, type ExamPaper } from '../data/exam-papers';
 import { addMockRecord, getPaperHistory, type MockRecord } from '../lib/mock-history';
 import { addWrongItem, removeWrongItem, getWrongItems } from '../lib/wrong-book';
 import ClozeRenderer from '../components/exercises/ClozeRenderer';

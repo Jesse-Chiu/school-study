@@ -1,5 +1,4 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, ChevronRight, Scale } from 'lucide-react';
 
 interface DaoSidebarProps {
   onNavigate?: () => void;
