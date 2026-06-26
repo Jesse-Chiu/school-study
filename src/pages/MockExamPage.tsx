@@ -4,7 +4,6 @@ import { Trophy, Clock, CheckCircle, RotateCcw, Bookmark, ChevronDown, ChevronUp
 import { examPapers, getExamPaper, getExamList, type ExamPaper } from '../data/exam-papers';
 import { addMockRecord, getPaperHistory, type MockRecord } from '../lib/mock-history';
 import { addWrongItem, removeWrongItem, getWrongItems } from '../lib/wrong-book';
-import { getCorrectAnswerText } from '../lib/exercise-utils';
 import ClozeRenderer from '../components/exercises/ClozeRenderer';
 import type { Exercise } from '../lib/types';
 

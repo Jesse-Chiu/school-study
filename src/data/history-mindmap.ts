@@ -1,4 +1,4 @@
-import type { MindMapNode } from '../types/mindmap-types';
+import type { MindMapNode } from '@/lib/types/mindmap-types';
 
 /**
  * 历史七年级下册知识脑图数据

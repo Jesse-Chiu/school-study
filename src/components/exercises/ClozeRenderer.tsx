@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 
 interface ClozeRendererProps {
   /** 包含 ___ 标记的问题文本 */

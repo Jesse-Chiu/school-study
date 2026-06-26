@@ -32,6 +32,10 @@ export interface Exercise {
   correctJudgement?: boolean;
   /** 辨析题专用：判断理由 */
   judgementReason?: string;
+  /** 分析说明题/综合题专用：参考答案 */
+  referenceAnswer?: string;
+  /** 辨析题专用：辨析答案（正确/错误） */
+  judgementAnswer?: string;
 }
 
 // 小节数据

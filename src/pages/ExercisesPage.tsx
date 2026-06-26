@@ -4,7 +4,6 @@ import { RotateCcw, Trophy, ChevronLeft, Bookmark } from 'lucide-react';
 import { unit3ComprehensiveExercises } from '../data/exercises/unit3-comprehensive';
 import { unit4ComprehensiveExercises } from '../data/exercises/unit4-comprehensive';
 import { addWrongItem, removeWrongItem, getWrongItems } from '../lib/wrong-book';
-import { getCorrectAnswerText } from '../lib/exercise-utils';
 import ClozeRenderer from '../components/exercises/ClozeRenderer';
 import type { Exercise } from '../lib/types';
 
