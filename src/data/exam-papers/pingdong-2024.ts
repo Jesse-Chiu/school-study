@@ -6,7 +6,7 @@ import type { ExamPaper } from './types';
  * 二、简答题：本大题共6小题，共50分（含判正误、填空）
  */
 
-const img = (name: string) => `/exam-images/${name}`;
+const img = (name: string) => `${import.meta.env.BASE_URL}exam-images/${name}`;
 
 export const pingdong2024: ExamPaper = {
   meta: {

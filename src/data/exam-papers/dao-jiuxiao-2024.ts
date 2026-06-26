@@ -198,7 +198,7 @@ export const daoJiuxiao2024: ExamPaper = {
       answer: 3,
       explanation: '谎报警情的行为，要受到法律的制裁，警示我们不违法是人们行为的底线，违反法律会受到法律的制裁，③④说法正确；①②说法与题意不符，应排除。',
       knowledgePoint: '违法行为',
-      image: '/dao-images/dao-page5-img1.png'
+      image: `${import.meta.env.BASE_URL}dao-images/dao-page5-img1.png`
     },
     {
       id: 'dao-21',
@@ -266,7 +266,7 @@ export const daoJiuxiao2024: ExamPaper = {
       knowledgePoint: '亲社会行为',
       correctJudgement: true,
       judgementReason: '志愿者的行为有利于养成良好的行为习惯，塑造健康的人格，形成正确的价值观念，获得社会和他人的接纳与认可，有利于形成好的社会风气等。',
-      image: '/dao-images/dao-page7-img1.png'
+      image: `${import.meta.env.BASE_URL}dao-images/dao-page7-img1.png`
     },
     
     // ==================== 三、分析说明题 (28-30) ====================
@@ -285,7 +285,7 @@ export const daoJiuxiao2024: ExamPaper = {
       answer: '（1）中华优秀传统文化中的人文精神是中华民族的精神家园和文化基因，它在社会生活中具有凝聚民族力量、引导价值取向、促进社会和谐的重要作用。它不仅塑造了中华民族的精神品格，也为实现社会进步和民族复兴提供了强大的精神动力和文化支撑。\n\n（2）名言一体现了自强不息的美德要求；名言二体现了敬业乐业的美德要求；名言三体现了孝老爱亲、以德为本的美德要求；名言四体现了见义勇为、扶危济困的美德要求。\n\n（3）孔融让梨：孔融是东汉末年文学家，四岁时，家人一起吃梨，轮到他时他挑了最小的。父亲问他原因，他说哥哥们大该吃大的，弟弟们小该让着。这体现孝悌谦让美德，故事流传至今。',
       explanation: '本题考查中华传统美德。需要回答人文精神的重要性、名言体现的美德、介绍传统美德故事。',
       knowledgePoint: '中华传统美德',
-      image: '/dao-images/dao-page8-img1.png'
+      image: `${import.meta.env.BASE_URL}dao-images/dao-page8-img1.png`
     },
     {
       id: 'dao-30',
@@ -294,7 +294,7 @@ export const daoJiuxiao2024: ExamPaper = {
       answer: '（1）行政违法行为，应受到行政处罚。\n\n（2）①我们作为社会成员，要珍惜美好生活，认清犯罪危害，远离犯罪。②预防犯罪，需要我们杜绝不良行为。③我们应增强法治观念，依法自律，做一个自觉守法的人。④我们要从小事做起，避免沾染不良习气，自觉遵纪守法，防患于未然。\n\n（3）及时拨打110报警电话或争取其他成人的帮助；虚张声势，与违法犯罪分子巧妙周旋等。\n\n（4）主刑：①③④⑦⑨（有期徒刑、拘役、管制、无期徒刑、死刑）\n附加刑：②⑤⑥⑧（剥夺政治权利、罚金、驱逐出境、没收财产）',
       explanation: '本题考查一般违法行为与犯罪的区别与联系、树立法治观念、犯罪含义和基本特征、刑罚的内涵和类型、预防违法犯罪。',
       knowledgePoint: '做守法的公民',
-      image: '/dao-images/dao-page4-img1.png'
+      image: `${import.meta.env.BASE_URL}dao-images/dao-page4-img1.png`
     }
   ]
 };
