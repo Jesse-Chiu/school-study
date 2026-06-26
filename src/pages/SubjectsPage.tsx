@@ -8,7 +8,7 @@ const subjects = [
     id: 'biology',
     name: '生物',
     grade: '七年级下册',
-    description: '人教版（2025春版）·完整知识点+专项练习+模拟测试+知识脑图',
+    description: '人教版（2026春版）·完整知识点+专项练习+模拟测试+知识脑图',
     available: true,
     color: 'from-emerald-500 to-teal-500',
     bgColor: 'bg-emerald-50',
@@ -195,9 +195,9 @@ export default function SubjectsPage() {
         })}
       </div>
 
-      {/* 底部提示 */}
-      <p className="text-center text-xs text-slate-300 dark:text-gray-600 mt-8">
-        © 2024 学科备考系统 · 助力期末复习
+      {/* 底部免责声明 */}
+      <p className="text-center text-xs text-slate-300 dark:text-gray-600 mt-8 px-4 leading-relaxed">
+        本网站内容整理自公开网络资源，仅供个人非商业参考。无需注册，不收集任何用户信息，完全免费。如涉及版权问题，请通过公众号联系我们，会在第一时间配合处理。© 2026 好好学习系统
       </p>
     </div>
   );

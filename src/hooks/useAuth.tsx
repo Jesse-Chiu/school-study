@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { initializeDatabase, loginUser, registerUser } from '../lib/database';
+import { initializeDatabase, loginUser, registerUser, loginWithCode as dbLoginWithCode } from '../lib/database';
 
 interface User {
   id: number;
@@ -10,6 +10,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  loginWithCode: (code: string) => Promise<{ success: boolean; message: string }>;
   login: (username: string, password: string) => Promise<{ success: boolean; message: string }>;
   register: (username: string, password: string, inviteCode: string) => Promise<{ success: boolean; message: string }>;
   logout: () => void;
@@ -40,6 +41,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     init();
   }, []);
 
+  const loginWithCode = async (code: string) => {
+    const result = dbLoginWithCode(code);
+    
+    if (result.success) {
+      const user = { id: result.userId, username: result.username };
+      setUser(user);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+    
+    return { success: result.success, message: result.message };
+  };
+
   const login = async (username: string, password: string) => {
     const result = loginUser(username, password);
     
@@ -63,7 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, loginWithCode, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

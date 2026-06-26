@@ -58,16 +58,20 @@ export const initDatabase = async (): Promise<any> => {
   if (dbInstance) return dbInstance;
   
   const SQL = await initSqlJs({
-    locateFile: (file: string) => `/node_modules/sql.js/${file}`
+    locateFile: () => `/sql-wasm.wasm`
   });
   
   const existingData = await loadDatabase();
   
   if (existingData) {
     dbInstance = new SQL.Database(existingData);
+    // 即使从缓存加载，也要确保建表 + 种子数据
+    createTables();
+    seedData();
   } else {
     dbInstance = new SQL.Database();
     createTables();
+    seedData();
   }
   
   return dbInstance;
@@ -126,12 +130,18 @@ const createTables = () => {
     )
   `);
   
-  const result = dbInstance.exec("SELECT COUNT(*) as count FROM invite_codes");
-  if (result[0].values[0][0] === 0) {
-    dbInstance.run("INSERT INTO invite_codes (code) VALUES ('STUDY2024')");
-  }
-  
   saveDbToIndexedDB();
+};
+
+// 种子数据：确保默认登入码始终存在
+const seedData = () => {
+  if (!dbInstance) return;
+  
+  const result = dbInstance.exec("SELECT COUNT(*) as count FROM invite_codes WHERE code = 'STUDY2026'");
+  if (!result[0] || result[0].values[0][0] === 0) {
+    dbInstance.run("INSERT OR IGNORE INTO invite_codes (code) VALUES ('STUDY2026')");
+    saveDbToIndexedDB();
+  }
 };
 
 const saveDbToIndexedDB = async () => {
@@ -172,7 +182,8 @@ export const dbRun = (sql: string, params: any[] = []): number => {
   
   try {
     const stmt = dbInstance.prepare(sql);
-    stmt.run(params);
+    stmt.bind(params);
+    stmt.step();
     stmt.free();
     
     saveDbToIndexedDB();
@@ -210,7 +221,73 @@ export const registerUser = (username: string, password: string, inviteCode: str
   return { success: false, message: '注册失败，请重试' };
 };
 
-// 用户登录
+// 用户登入码验证（扫码关注公众号后获取登入码）
+export const loginWithCode = (code: string): { success: boolean; userId: number; username: string; message: string } => {
+  if (!dbInstance) {
+    console.error('[loginWithCode] dbInstance 为空');
+    return { success: false, userId: -1, username: '', message: '系统初始化中，请刷新页面' };
+  }
+
+  try {
+    // 查找登入码 - 直接使用 dbInstance.prepare
+    let stmt = dbInstance.prepare("SELECT * FROM invite_codes WHERE code = ?");
+    stmt.bind([code]);
+    
+    if (!stmt.step()) {
+      stmt.free();
+      console.warn('[loginWithCode] 登入码无效:', code);
+      return { success: false, userId: -1, username: '', message: '登入码无效' };
+    }
+    
+    const inviteEntry = stmt.getAsObject();
+    stmt.free();
+    
+    const username = `student_${Date.now()}`;
+
+    // 登入码已被使用，查找对应用户
+    if (inviteEntry.used_by) {
+      stmt = dbInstance.prepare("SELECT * FROM users WHERE id = ?");
+      stmt.bind([inviteEntry.used_by]);
+      
+      if (stmt.step()) {
+        const user = stmt.getAsObject();
+        stmt.free();
+        return { 
+          success: true, 
+          userId: user.id, 
+          username: user.username, 
+          message: '登入成功（已有账户）' 
+        };
+      }
+      stmt.free();
+    }
+
+    // 登入码未使用，创建新用户 — 直接 dbInstance.run(sql, params)
+    dbInstance.run(
+      "INSERT INTO users (username, password, invite_code) VALUES (?, ?, ?)",
+      [username, code, code]
+    );
+
+    // 获取刚插入的 userId
+    const lastIdResult = dbInstance.exec("SELECT last_insert_rowid() as id");
+    const userId = lastIdResult[0]?.values?.[0]?.[0] as number;
+    
+    console.log('[loginWithCode] 插入结果 userId:', userId);
+
+    if (userId && userId > 0) {
+      dbInstance.run("UPDATE invite_codes SET used_by = ? WHERE code = ?", [userId, code]);
+      saveDbToIndexedDB();
+      return { success: true, userId, username, message: '首次登入成功' };
+    }
+
+    return { success: false, userId: -1, username: '', message: '创建账户失败，请重试' };
+  } catch (error) {
+    console.error('[loginWithCode] 异常:', error);
+    return { success: false, userId: -1, username: '', message: `系统错误: ${error}` };
+  }
+};
+
+// 用户登录（用户名+密码，保留供后续使用）
 export const loginUser = (username: string, password: string): { success: boolean; userId: number; message: string } => {
   const result = dbQuery("SELECT * FROM users WHERE username = ? AND password = ?", [username, password]);
   

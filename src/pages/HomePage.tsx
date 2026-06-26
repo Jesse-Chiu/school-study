@@ -11,7 +11,7 @@ export default function HomePage() {
       <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 text-white mb-8">
         <h1 className="text-2xl font-bold mb-2">📘 七年级下册生物 · 期末备考</h1>
         <p className="text-emerald-100 text-sm mb-4">
-          人教版（2025春版）· 完整知识点 + 专项练习 + 模拟测试
+          人教版（2026春版）· 完整知识点 + 专项练习 + 模拟测试
         </p>
         <div className="flex gap-3">
           <button
