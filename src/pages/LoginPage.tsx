@@ -78,7 +78,7 @@ export default function LoginPage() {
             <div className="relative">
               <div className="w-48 h-48 rounded-2xl overflow-hidden border-4 border-green-100 dark:border-green-900/50 shadow-lg">
                 <img
-                  src="/qrcode.jpeg"
+                  src={import.meta.env.BASE_URL + 'qrcode.jpeg'}
                   alt="牛油果学习俱乐部公众号二维码"
                   className="w-full h-full object-cover"
                 />
