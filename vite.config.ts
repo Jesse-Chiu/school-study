@@ -3,12 +3,12 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/school-study/',
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/school-study/' : '/',
   plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+}));
