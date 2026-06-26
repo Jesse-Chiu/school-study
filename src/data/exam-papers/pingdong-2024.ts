@@ -2,11 +2,14 @@ import type { ExamPaper } from './types';
 
 /**
  * 2024-2025学年福建省福州市屏东中学七年级（下）期末生物试卷
- * 一、选择题：本大题共25小题，共32分
- * 二、简答题：本大题共6小题，共50分（含判正误、填空）
+ * 一、选择题：本大题共25小题，共32分（第1-15题，每题1分；第16-25题，每题2分）
+ * 二、判断题：共5小题，共10分（每小题2分）
+ * 三、填空题：共5大题，共58分（按空格给分）
  */
 
 const img = (name: string) => `${import.meta.env.BASE_URL}exam-images/${name}`;
+
+// 各题分值（依据PDF答案分页标注的难度和题量计算）
 
 export const pingdong2024: ExamPaper = {
   meta: {
@@ -27,6 +30,8 @@ export const pingdong2024: ExamPaper = {
       question: '农民在向日葵的开花季节会为向日葵"对头"（将两个花盘对擦），这样做的目的是（　）',
       options: ['搜集花粉', '辅助授粉', '保护花蕊', '去除花瓣'],
       answer: 1,
+      score: 1,
+
       explanation: '将两个花盘对擦可以帮助花粉从一个花盘传播到另一个花盘的雌蕊柱头上，起到辅助授粉的作用，提高结实率。',
       knowledgePoint: '传粉和受精',
     },
@@ -41,6 +46,8 @@ export const pingdong2024: ExamPaper = {
         '环割处理影响橘子树对水和无机盐的运输',
       ],
       answer: 3,
+      score: 1,
+
       explanation: '环割割断树皮中韧皮部内的筛管，暂时阻断有机物向下运输。木质部内的导管向上运输水和无机盐，环割不影响木质部，因此不影响水和无机盐的运输。',
       knowledgePoint: '导管和筛管',
       image: img('p1_img2.png'),
@@ -51,6 +58,8 @@ export const pingdong2024: ExamPaper = {
       question: '俗话说"根深才能叶茂"，如图根尖结构中，与"根深"和"叶茂"有关的区域分别是（　）',
       options: ['③区；①区和②区', '②区和③区；①区', '③区和④区；②区', '②区；①区和③区'],
       answer: 1,
+      score: 1,
+
       explanation: '根长长主要与②伸长区和③分生区的活动有关（根深）；成熟区是吸收水和无机盐的主要部位，因此"叶茂"与①成熟区的活动有关。①成熟区、②伸长区、③分生区、④根冠。',
       knowledgePoint: '根尖的结构与功能',
       image: img('p1_img3.png'),
@@ -61,6 +70,8 @@ export const pingdong2024: ExamPaper = {
       question: '如图中甲是叶芽的纵切面示意图，乙是枝条示意图。下列叙述错误的是（　）',
       options: ['1将发育为b', '2中含分生组织', '3将发育为c', '4一定发育为花'],
       answer: 3,
+      score: 1,
+
       explanation: '芽原基发育为侧芽，侧芽未必发育成花，也有可能发育成枝条。1幼叶→b叶（正确），2生长点含分生组织（正确），3芽轴→c茎（正确）。',
       knowledgePoint: '芽的结构和发育',
       image: img('p1_img4.png'),
@@ -71,6 +82,8 @@ export const pingdong2024: ExamPaper = {
       question: '风铃木花的结构中与繁殖后代直接相关的是（　）',
       options: ['花托', '花萼', '花蕊', '花瓣'],
       answer: 2,
+      score: 1,
+
       explanation: '雄蕊和雌蕊（合称花蕊）与果实和种子的形成有直接关系，是花的主要结构。',
       knowledgePoint: '花的结构',
     },
@@ -80,6 +93,8 @@ export const pingdong2024: ExamPaper = {
       question: '移栽风铃木作为行道树时，下列做法不合理的是（　）',
       options: ['小心保留全部枝叶', '在阴天或傍晚移栽', '移栽时根部带土团', '移栽后给植株浇水'],
       answer: 0,
+      score: 1,
+
       explanation: '叶片是蒸腾作用的主要部位。移栽时根系受损，吸水能力下降，应剪掉大量枝叶以降低蒸腾作用，减少水分散失，提高成活率。保留全部枝叶不合理。',
       knowledgePoint: '蒸腾作用的应用',
     },
@@ -89,6 +104,8 @@ export const pingdong2024: ExamPaper = {
       question: '如图中①、②、③分别表示风铃木的生理活动，使公园内空气"湿润、清新"的生理活动分别是（　）',
       options: ['①，②', '①，③', '②，③', '②①，③'],
       answer: 2,
+      score: 1,
+
       explanation: '①呼吸作用、②蒸腾作用、③光合作用。蒸腾作用使空气湿润；光合作用吸收二氧化碳、释放氧气，使空气清新。故是②和③。',
       knowledgePoint: '植物的三大生理活动',
       image: img('p2_img2.png'),
@@ -104,6 +121,8 @@ export const pingdong2024: ExamPaper = {
         '甲和乙细胞都没有叶绿体',
       ],
       answer: 2,
+      score: 1,
+
       explanation: '甲根毛细胞属于植物细胞，有细胞壁，但突起是表皮细胞向外突出形成而非细胞壁突出；乙小肠绒毛细胞属于动物细胞，无细胞壁。因此C错误。',
       knowledgePoint: '动植物细胞结构与功能',
       image: img('p2_img1.png'),
@@ -119,6 +138,8 @@ export const pingdong2024: ExamPaper = {
         '研究馒头在口腔中的变化—碘液—鉴定葡萄糖',
       ],
       answer: 1,
+      score: 1,
+
       explanation: 'A：湿纱布用于保持小鱼正常呼吸，非防止观察环境。B：正确。C：酒精用于溶解叶绿素（脱色），非消毒。D：碘液用于检验淀粉，无法直接鉴定葡萄糖。',
       knowledgePoint: '生物实验操作',
     },
@@ -133,6 +154,8 @@ export const pingdong2024: ExamPaper = {
         '丁中蜡烛熄灭，说明萌发的种子呼吸作用产生二氧化碳',
       ],
       answer: 3,
+      score: 1,
+
       explanation: '丁装置中蜡烛熄灭证明萌发的种子呼吸作用消耗氧气，而非产生二氧化碳。',
       knowledgePoint: '植物生理活动实验',
       image: img('p3_img2.png'),
@@ -148,6 +171,8 @@ export const pingdong2024: ExamPaper = {
         '若丁叶片经脱色、染色后，A部分变蓝，B部分不变蓝，则证明水是光合作用的原料',
       ],
       answer: 3,
+      score: 1,
+
       explanation: '将叶片暗处理、割断叶脉后，A区不变蓝色（无水），B区变蓝色（有水），证明水是光合作用的原料。选项说A变蓝B不变蓝颠倒了。',
       knowledgePoint: '光合作用实验',
       image: img('p3_img1.png'),
@@ -158,6 +183,8 @@ export const pingdong2024: ExamPaper = {
       question: '胎儿发育时废物排出的途径是：胎儿→P→子宫内膜。P代表的结构是（　）',
       options: ['胎盘→脐带', '脐带→胎盘', '输卵管→卵巢', '卵巢→输卵管'],
       answer: 1,
+      score: 1,
+
       explanation: '胎儿通过脐带与胎盘相连，胎儿产生的废物通过脐带运输到胎盘，再由胎盘与子宫内膜中的血液进行物质交换。P代表脐带→胎盘。',
       knowledgePoint: '胚胎的发育和营养',
     },
@@ -167,6 +194,8 @@ export const pingdong2024: ExamPaper = {
       question: '下列营养物质，不经消化即可被人体直接吸收的是（　）',
       options: ['脂肪', '蛋白质', '水', '淀粉'],
       answer: 2,
+      score: 1,
+
       explanation: '人体能直接吸收的必须是小分子物质。水是小分子，可直接吸收。脂肪、蛋白质、淀粉是大分子，需消化分解后才能吸收。',
       knowledgePoint: '食物的消化与吸收',
     },
@@ -176,6 +205,8 @@ export const pingdong2024: ExamPaper = {
       question: '口腔术后患者有时会采用"鼻饲"（食物经鼻入胃）方式进食，食物不会经过的器官是（　）',
       options: ['胃', '喉', '食管', '咽'],
       answer: 1,
+      score: 1,
+
       explanation: '喉属于呼吸系统，不属于消化道。鼻饲通道为：鼻→咽→食道→胃，不经过喉。',
       knowledgePoint: '消化系统的组成',
     },
@@ -185,6 +216,8 @@ export const pingdong2024: ExamPaper = {
       question: '某人在阑尾炎手术后的康复期间，为了促进其伤口愈合，你建议他应该多吃一些（　）',
       options: ['肉、蛋', '动物肝脏', '米饭、馒头', '蔬菜、水果'],
       answer: 0,
+      score: 1,
+
       explanation: '蛋白质是构成人体细胞的基本物质，组织修复和更新离不开蛋白质。肉、蛋富含蛋白质，利于伤口愈合。',
       knowledgePoint: '食物中的营养物质',
     },
@@ -194,6 +227,8 @@ export const pingdong2024: ExamPaper = {
       question: '体育课跑完八百米，同学们汗如雨下，此时随汗液排出体外的废物是（　）',
       options: ['葡萄糖', '氨基酸', '维生素', '无机盐'],
       answer: 3,
+      score: 1,
+
       explanation: '汗液的成分主要是水、无机盐和尿素，无机盐是随汗液排出的主要代谢废物之一。葡萄糖、氨基酸和维生素不是代谢废物。',
       knowledgePoint: '排泄的途径',
     },
@@ -203,6 +238,8 @@ export const pingdong2024: ExamPaper = {
       question: '无偿献血是公民应尽的义务。A型血的患者输血时，接受的最佳血型是（　）',
       options: ['O型血', 'AB型血', 'A型血', '都可以'],
       answer: 2,
+      score: 1,
+
       explanation: '输血以输同型血为原则。A型血患者应输A型血。紧急情况下O型可输给任何血型，但不是最佳。',
       knowledgePoint: '输血与血型',
     },
@@ -217,6 +254,8 @@ export const pingdong2024: ExamPaper = {
         '④是血液的液体部分，具有运输功能',
       ],
       answer: 3,
+      score: 1,
+
       explanation: '①红细胞（无核，运输氧）；②白细胞（有核，吞噬病菌）；③血小板（无核，止血凝血）；④血浆（运输功能）。A①②③的描述均错误，D正确。',
       knowledgePoint: '血液的成分与功能',
       image: img('p4_img4.png'),
@@ -232,6 +271,8 @@ export const pingdong2024: ExamPaper = {
         '遇到焦虑等不良情绪时，可以通过合理宣泄、适当倾诉等方式调节',
       ],
       answer: 2,
+      score: 1,
+
       explanation: '身高突增是青春期的一个显著特点，但性器官是一出生就已经形成的，不是青春期才形成。C选项后半句错误。',
       knowledgePoint: '青春期',
     },
@@ -247,6 +288,8 @@ export const pingdong2024: ExamPaper = {
         '五菜含有纤维素，可以代替五谷',
       ],
       answer: 3,
+      score: 1,
+
       explanation: '膳食纤维不能为人体生命活动提供能量，五菜不可以代替五谷。五谷富含淀粉是主要供能物质。',
       knowledgePoint: '食物中的营养物质',
     },
@@ -256,6 +299,8 @@ export const pingdong2024: ExamPaper = {
       question: '中医认为胃的主要功能是"腐熟水谷"，即消化。下列关于胃的叙述正确的是（　）',
       options: ['初步分解蛋白质', '分泌胃液和胆汁', '能吸收氨基酸', '吸收的主要器官'],
       answer: 0,
+      score: 1,
+
       explanation: '胃有胃腺分泌胃液，能对蛋白质进行初步消化。胃不能分泌胆汁（肝分泌），不能吸收氨基酸，不是吸收的主要场所。',
       knowledgePoint: '消化和吸收',
     },
@@ -270,6 +315,8 @@ export const pingdong2024: ExamPaper = {
         '尿液的形成过程是间断的',
       ],
       answer: 0,
+      score: 1,
+
       explanation: '①动脉、②肾小囊、③肾小球、④肾小管、⑤静脉中的液体均含水、无机盐和尿素。⑤比①尿素减少（B错）；尿液出现红细胞是③肾小球病变（C错）；尿液形成是连续的（D错）。',
       knowledgePoint: '尿液的形成',
       image: img('p4_img5.png'),
@@ -285,6 +332,8 @@ export const pingdong2024: ExamPaper = {
         '其在腕部分布较浅，输液可以选择此血管',
       ],
       answer: 3,
+      score: 1,
+
       explanation: '输液要从静脉血管输入，不能选择动脉。ABC均正确：脉搏=心跳次数，动脉由近心端→远心端，动脉出血近心端止血。',
       knowledgePoint: '血管的结构与功能',
       image: img('p4_img6.png'),
@@ -300,6 +349,8 @@ export const pingdong2024: ExamPaper = {
         '血管内红细胞单行通过',       // D - 毛细血管
       ],
       answer: 2,
+      score: 1,
+
       explanation: '动脉是将心脏中的血液送到全身各处的血管，血液由主干流向分支。A为静脉，B为静脉（流入心脏），D为毛细血管。',
       knowledgePoint: '血管的类型',
       image: img('p4_img3.png'),
@@ -315,6 +366,8 @@ export const pingdong2024: ExamPaper = {
         '从甲到乙时，膈肌收缩，呼气',
       ],
       answer: 1,
+      score: 1,
+
       explanation: '人体呼出气体中氧气减少、二氧化碳增多，但呼出气体最多的成分依次是氮气、氧气，A错。乙→甲膈肌舒张→呼气（胸腔容积减小），C错。甲→乙膈肌收缩→吸气（胸腔容积增大），D错。B正确。',
       knowledgePoint: '肺与外界的气体交换',
       image: img('p4_img7.png'),
@@ -327,6 +380,8 @@ export const pingdong2024: ExamPaper = {
       type: 'true-false',
       question: '如图是试管婴儿技术操作流程。③能促进第二性征，是女性主要的生殖器官。（判断正误）',
       answer: false,
+      score: 1,
+
       explanation: '女性主要的生殖器官是①卵巢，能产生卵细胞和分泌雌性激素。③是子宫，不是主要的生殖器官。',
       knowledgePoint: '女性生殖系统',
       image: img('p5_img1.png'),
@@ -336,6 +391,8 @@ export const pingdong2024: ExamPaper = {
       type: 'true-false',
       question: '试管婴儿技术中，"试管"相当于结构②（输卵管），若②堵塞，可通过该技术辅助生育。（判断正误）',
       answer: true,
+      score: 1,
+
       explanation: '试管婴儿技术是让精子和卵细胞在体外受精，"试管"相当于②输卵管。如果输卵管堵塞，自然受精困难，可通过试管婴儿技术辅助生育。',
       knowledgePoint: '试管婴儿技术',
       image: img('p5_img1.png'),
@@ -345,6 +402,8 @@ export const pingdong2024: ExamPaper = {
       type: 'true-false',
       question: '如图，采卵针穿刺进入①（卵巢）内，可获取卵细胞。（判断正误）',
       answer: true,
+      score: 1,
+
       explanation: '图中①是卵巢，采卵针穿刺进入卵巢内可获取卵细胞。',
       knowledgePoint: '女性生殖系统',
       image: img('p5_img1.png'),
@@ -354,6 +413,8 @@ export const pingdong2024: ExamPaper = {
       type: 'true-false',
       question: '由图可知，试管婴儿技术中受精卵直接植入母体。（判断正误）',
       answer: false,
+      score: 1,
+
       explanation: '由图可知，是将早期胚胎植入母体，而非受精卵直接植入。',
       knowledgePoint: '试管婴儿技术',
       image: img('p5_img1.png'),
@@ -363,6 +424,8 @@ export const pingdong2024: ExamPaper = {
       type: 'true-false',
       question: '试管婴儿技术中胎儿所需营养物质主要还是由母体提供。（判断正误）',
       answer: true,
+      score: 1,
+
       explanation: '试管婴儿技术中，胎儿在母体内发育，所需营养物质主要还是由母体通过胎盘提供。',
       knowledgePoint: '胚胎的发育和营养',
       image: img('p5_img1.png'),
@@ -374,6 +437,8 @@ export const pingdong2024: ExamPaper = {
       type: 'fill-blank',
       question: '引入小溪洞杜鹃的种子进行人工种植时，需要加入砾石、珍珠岩等避免土壤板结，目的是为种子的萌发提供___。Ⅰ为叶片横切，①的细胞中具有___，可吸收光能进行光合作用。光合作用有助于维持生物圈中的___平衡。其花粉表面有黏丝，利于花粉落到图Ⅲ中的[___]___上完成传粉，精卵结合完成___过程。将来发育为果实的结构是[___]___。',
       answer: ['充足的空气', '叶绿体', '碳氧', '②', '柱头', '受精', '④', '子房'],
+      score: 12,
+
       explanation: '种子萌发需要充足的空气；叶肉细胞含叶绿体进行光合作用；光合作用维持碳—氧平衡；花粉落到②柱头上完成传粉，之后完成受精；④子房发育成果实。',
       knowledgePoint: '种子萌发、光合作用、传粉受精、果实形成',
       image: img('p5_img2.png'),
@@ -385,6 +450,8 @@ export const pingdong2024: ExamPaper = {
       type: 'fill-blank',
       question: '玉米、小麦、水稻等种子中都储存了大量遇碘变蓝的___等有机物，它们主要通过[C]___作用合成。这些水大部分参与了植物体的[A]___作用。低温则可以减弱[B]___作用，延长玉米储存时间。淀粉首先在[①]___开始被初步消化为___。将试管放置在37℃环境中的目的是___。一段时间后滴加碘液，若试管___（填"1"或"2"）不变蓝，则说明唾液具有消化作用。人体的小肠内有皱襞，皱襞表面还有[a]___，a内含丰富的[b]___，利于营养物质的吸收，吸收的营养物质通过血液的成分___运输至全身细胞。',
       answer: ['淀粉', '光合', '蒸腾', '呼吸', '口腔', '麦芽糖', '模拟人体口腔温度', '2', '小肠绒毛', '毛细血管', '血浆'],
+      score: 16,
+
       explanation: 'A蒸腾作用散失大部分水分；B呼吸作用消耗有机物，低温可抑制；C光合作用合成淀粉。唾液消化淀粉→麦芽糖，37℃是酶最适温度。小肠绒毛+毛细血管增大吸收面积；血浆运输养料。',
       knowledgePoint: '植物的生理活动、消化吸收、血液',
       image: img('p6_img1.png'),
@@ -396,6 +463,8 @@ export const pingdong2024: ExamPaper = {
       type: 'fill-blank',
       question: '图Ⅰ模型中，笔筒和气球分别模拟图Ⅱ所示呼吸系统的呼吸道和[___]___。此装置中利用的玻璃瓶模拟人体胸廓并不是最理想的材料，可能的原因是___。实验后笔筒和气球内壁附着的黄色黏稠物质会影响肺泡的___功能而影响人体对氧的获取。图Ⅲ中血液从毛细血管的C端流到D端，[A]___进入血液，血液变为___血，并从D端流回心脏，再经___循环运输至全身。烟龄越长的人群，肺癌发病率越___。',
       answer: ['②', '肺', '玻璃瓶不能伸缩，没有弹性，无法模拟胸廓前后、左右径的变化', '气体交换', '氧气', '动脉', '体', '高'],
+      score: 12,
+
       explanation: '②是肺；玻璃瓶无弹性无法模拟胸廓变化；黏稠物影响肺泡气体交换；A为氧气，经气体交换后静脉血变动脉血；体循环将含氧血送至全身；烟龄越长，肺癌发病率越高。',
       knowledgePoint: '呼吸系统、血液循环',
       image: img('p7_img1.png'),
@@ -407,6 +476,8 @@ export const pingdong2024: ExamPaper = {
       type: 'fill-blank',
       question: '食物中的糖类主要在图甲的[___]___中被彻底消化为葡萄糖，经过程[7]___进入循环系统后，依次经过图乙心脏的___四个腔（用字母表示），再由心腔[___]___泵至全身组织细胞。图丁中曲线a、b、c中，可能表示健康人葡萄糖含量变化的是___（填字母）。体内胰岛素分泌不足时，当血液流经图戊的结构[___]___时，部分葡萄糖来不及进入⑤，完成[5]___作用。糖尿病人葡萄糖随尿液排出的途径：①→___→体外（用图戊中的数字和箭头表示）。过剩的糖类等物质可转化成备用的能源物质___。胰岛素不足导致糖尿病时，可通过___（填"口服"或"注射"）胰岛素治疗。',
       answer: ['④', '小肠', '吸收', 'A→B→C→D', 'D', '左心室', 'c', '⑥', '肾小管', '重吸收', '③→④→⑥', '脂肪', '注射'],
+      score: 19,
+
       explanation: '④小肠是消化吸收主要部位；葡萄糖经7吸收进循环→A右心房→B右心室→C左心房→D左心室→泵至全身。c曲线在Ⅲ处降为0代表葡萄糖被肾小管重吸收。胰岛素是蛋白质不能口服。',
       knowledgePoint: '消化吸收、血液循环、尿的形成、激素调节',
       image: img('p8_img1.png'),
@@ -418,6 +489,8 @@ export const pingdong2024: ExamPaper = {
       type: 'fill-blank',
       question: '颈动脉是将血液___（填"a.从头部运回心脏"或"b.从心脏运送到头部"）的血管。从表中数据可知，单位时间内睡眠障碍组流经颈动脉的血量___（填"大于"或"小于"）睡眠正常组。上实验设计睡眠正常组起___作用，处理方式"A"处应填___。为减小因个体差异造成的偶然性而采取的措施是___。碎片化睡眠引起动脉阻力变化的原因是___。有助于血管健康的做法是___（多选：a.创造安静睡眠环境避免惊醒/b.晚上睡觉学习交替/c.睡前不大量饮水避免频繁排尿/d.减少夜间睡眠白天补充）。',
       answer: ['b', '小于', '对照', '正常饮食，适当运动', '选取多只小鼠进行实验', '睡眠障碍导致血管收缩能力下降', 'a、c'],
+      score: 11,
+
       explanation: '颈动脉将血液从心脏送到头部。睡眠障碍组阻力指数更高→血量更少。正常组是对照组。多只小鼠减小个体差异。碎片化睡眠→血管收缩能力↓。ac是健康睡眠习惯。',
       knowledgePoint: '血管功能、科学探究、健康生活',
       image: img('p9_img1.png'),

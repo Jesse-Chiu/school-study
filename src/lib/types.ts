@@ -36,6 +36,8 @@ export interface Exercise {
   referenceAnswer?: string;
   /** 辨析题专用：辨析答案（正确/错误） */
   judgementAnswer?: string;
+  /** 本题分值（不填则按总分/题数平均分配） */
+  score?: number;
 }
 
 // 小节数据

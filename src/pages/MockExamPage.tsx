@@ -9,22 +9,56 @@ import type { Exercise } from '../lib/types';
 
 // ────────── 工具函数 ──────────
 
-function checkAnswer(ex: Exercise, userAns: boolean | number | number[] | string | string[] | undefined) {
-  if (userAns === undefined) return false;
-  if (ex.type === 'true-false') return userAns === ex.answer;
-  if (ex.type === 'single-choice') return userAns === ex.answer;
+// 返回本题得分详情（支持按空格给分）
+function checkAnswer(
+  ex: Exercise,
+  userAns: boolean | number | number[] | string | string[] | undefined,
+  exScore: number = 0
+): { correct: boolean; earned: number; blankScores?: number[] } {
+  if (userAns === undefined) return { correct: false, earned: 0 };
+  const score = exScore || (ex.score ?? 0);
+
+  // 判断题 / 单选题：全对得满分
+  if (ex.type === 'true-false') {
+    const ok = userAns === ex.answer;
+    return { correct: ok, earned: ok ? score : 0 };
+  }
+  if (ex.type === 'single-choice') {
+    const ok = userAns === ex.answer;
+    return { correct: ok, earned: ok ? score : 0 };
+  }
+
+  // 多选题：选项全对得满分
   if (ex.type === 'multi-choice') {
     const u = userAns as number[];
     const a = ex.answer as number[];
-    return u.length === a.length && u.every(v => a.includes(v));
+    const ok = u.length === a.length && u.every(v => a.includes(v));
+    return { correct: ok, earned: ok ? score : 0 };
   }
+
+  // 填空题：按每个空格给分
   if (ex.type === 'fill-blank' && Array.isArray(ex.answer) && Array.isArray(userAns)) {
     const blanks = ex.answer as string[];
     const userBlanks = userAns as string[];
-    return blanks.length === userBlanks.length &&
-      blanks.every((ans, i) => (userBlanks[i] || '').trim().toLowerCase() === ans.trim().toLowerCase());
+    const blankScores: number[] = [];
+    let earned = 0;
+    const pointsPerBlank = blanks.length > 0 ? score / blanks.length : 0;
+    blanks.forEach((ans, i) => {
+      const userVal = (userBlanks[i] || '').trim().toLowerCase();
+      const ok = userVal === ans.trim().toLowerCase();
+      if (ok) {
+        blankScores.push(pointsPerBlank);
+        earned += pointsPerBlank;
+      } else {
+        blankScores.push(0);
+      }
+    });
+    // 四舍五入保留2位小数
+    earned = Math.round(earned * 100) / 100;
+    return { correct: blankScores.every(s => s > 0), earned, blankScores };
   }
-  return false;
+
+  return { correct: false, earned: 0 };
 }
 
 const typeLabel = (type: string) => {
@@ -154,12 +188,30 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
     if (!submitted || reviewFilter !== 'wrong') return exercises.map((_, i) => i);
     return exercises
       .map((ex, i) => ({ ex, i }))
-      .filter(({ ex }) => !checkAnswer(ex, answers[ex.id]))
+      .filter(({ ex }) => {
+        const r = checkAnswer(ex, answers[ex.id], ex.score || 0);
+        return r.earned === 0;
+      })
       .map(({ i }) => i);
   }, [submitted, reviewFilter, exercises, answers]);
 
-  const correctCount = exercises.filter(ex => checkAnswer(ex, answers[ex.id])).length;
-  const score = Math.round((correctCount / TOTAL) * paper.meta.totalScore);
+  // 按题型给分（填空题按空格给分）
+  let score = 0;
+  const blankDetails: { exId: string; blankScores: number[] }[] = [];
+  exercises.forEach(ex => {
+    const result = checkAnswer(ex, answers[ex.id], ex.score || 0);
+    score += result.earned;
+    if (result.blankScores) {
+      blankDetails.push({ exId: ex.id, blankScores: result.blankScores });
+    }
+  });
+  score = Math.round(score * 100) / 100;
+  
+  // 计算完全答对的题数
+  const correctCount = exercises.filter(ex => {
+    const r = checkAnswer(ex, answers[ex.id], ex.score || 0);
+    return r.correct;  // 全部空格/选项都对
+  }).length;
 
   // 计时器
   useEffect(() => {
@@ -301,7 +353,8 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
   const isLast = currentIndex === TOTAL - 1;
   const unansweredCount = exercises.filter(ex => answers[ex.id] === undefined).length;
   const paperHistory = user ? getExamRecords(user.id, paper.meta.id) : [];
-  const isCorrect = submitted ? checkAnswer(currentEx, answers[currentEx.id]) : false;
+  const answerResult = submitted ? checkAnswer(currentEx, answers[currentEx.id], currentEx.score || 0) : null;
+  const isCorrect = answerResult ? answerResult.correct : false;
   const isUnanswered = submitted && answers[currentEx.id] === undefined;
   const userAnswer = answers[currentEx.id];
 
