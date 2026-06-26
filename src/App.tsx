@@ -18,12 +18,21 @@ import HistoryMindMapPage from '@/pages/HistoryMindMapPage';
 import HistorySummaryPage from '@/pages/HistorySummaryPage';
 import LoginPage from '@/pages/LoginPage';
 import { ThemeProvider } from '@/hooks/useTheme';
+import { AuthProvider, useAuth } from '@/hooks/useAuth';
 
-// 路由守卫组件
+// 路由守卫组件（使用新的 auth 系统）
 function PrivateRoute({ children }: { children: React.ReactNode }) {
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const { user, loading } = useAuth();
   
-  if (!isLoggedIn) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+  
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
   
@@ -33,17 +42,18 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider>
-        <Routes>
-          {/* 登录页面 */}
-          <Route path="/login" element={<LoginPage />} />
+      <AuthProvider>
+        <ThemeProvider>
+          <Routes>
+            {/* 登录页面 */}
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* 多学科首页：全宽无侧边栏 */}
-          <Route path="/" element={
-            <PrivateRoute>
-              <SubjectsPage />
-            </PrivateRoute>
-          } />
+            {/* 多学科首页：全宽无侧边栏 */}
+            <Route path="/" element={
+              <PrivateRoute>
+                <SubjectsPage />
+              </PrivateRoute>
+            } />
 
           {/* 生物学科内页：带侧边栏布局 */}
           <Route element={<Layout />}>
@@ -79,6 +89,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ThemeProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

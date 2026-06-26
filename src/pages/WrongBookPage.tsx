@@ -1,32 +1,55 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trash2, ChevronLeft } from 'lucide-react';
-import { getWrongItems, removeWrongItem, clearWrongBook, type WrongItem } from '../lib/wrong-book';
+import { useAuth } from '../hooks/useAuth';
+import { getWrongQuestions, removeWrongQuestion, clearWrongQuestions } from '../lib/database';
 import { getSectionInfo } from '../data/structure';
+
+interface WrongItem {
+  id: number;
+  user_id: number;
+  question_id: string;
+  subject: string;
+  unit_id: string;
+  chapter_id: string;
+  question_data: any;
+  added_at: string;
+}
 
 export default function WrongBookPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [items, setItems] = useState<WrongItem[]>([]);
   const [clearConfirm, setClearConfirm] = useState(false);
 
   useEffect(() => {
-    setItems(getWrongItems());
-  }, []);
+    if (user) {
+      loadWrongQuestions();
+    }
+  }, [user]);
 
-  const handleRemove = (id: string) => {
-    removeWrongItem(id);
-    setItems(getWrongItems());
+  const loadWrongQuestions = () => {
+    if (!user) return;
+    const data = getWrongQuestions(user.id);
+    setItems(data);
+  };
+
+  const handleRemove = (questionId: string) => {
+    if (!user) return;
+    removeWrongQuestion(user.id, questionId);
+    loadWrongQuestions();
   };
 
   const handleClearAll = () => {
-    clearWrongBook();
+    if (!user) return;
+    clearWrongQuestions(user.id);
     setItems([]);
     setClearConfirm(false);
   };
 
   // 按小节分组
   const grouped = items.reduce<Record<string, WrongItem[]>>((acc, item) => {
-    const key = item.sectionId || 'other';
+    const key = item.question_data?.sectionId || 'other';
     if (!acc[key]) acc[key] = [];
     acc[key].push(item);
     return acc;
@@ -35,18 +58,18 @@ export default function WrongBookPage() {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-slate-100">
+        <button onClick={() => navigate(-1)} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-700">
           <ChevronLeft size={20} />
         </button>
-        <h1 className="text-xl font-bold text-slate-800">📕 错题本</h1>
+        <h1 className="text-xl font-bold text-slate-800 dark:text-white">📕 错题本</h1>
         <span className="text-xs text-slate-400 ml-2">共 {items.length} 题</span>
       </div>
 
       {items.length === 0 ? (
-        <div className="bg-white rounded-xl border border-slate-100 p-10 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-slate-100 dark:border-gray-700 p-10 text-center">
           <div className="text-4xl mb-3">📭</div>
-          <p className="text-slate-500">暂无错题</p>
-          <p className="text-xs text-slate-400 mt-1">练习或测试中答错的题目会自动记录在这里</p>
+          <p className="text-slate-500 dark:text-gray-400">暂无错题</p>
+          <p className="text-xs text-slate-400 dark:text-gray-500 mt-1">练习或测试中答错的题目会自动记录在这里</p>
         </div>
       ) : (
         <>
@@ -54,17 +77,17 @@ export default function WrongBookPage() {
           <div className="flex justify-end mb-4">
             <button
               onClick={() => setClearConfirm(true)}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-red-500 border border-red-200 hover:bg-red-50"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-red-500 border border-red-200 hover:bg-red-50 dark:hover:bg-red-900/20"
             >
               <Trash2 size={14} /> 清空错题本
             </button>
           </div>
 
           {clearConfirm && (
-            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4 flex items-center justify-between">
-              <span className="text-sm text-red-700">确定要清空全部错题吗？此操作不可恢复。</span>
+            <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-4 flex items-center justify-between">
+              <span className="text-sm text-red-700 dark:text-red-400">确定要清空全部错题吗？此操作不可恢复。</span>
               <div className="flex gap-2">
-                <button onClick={() => setClearConfirm(false)} className="px-3 py-1 rounded text-xs border border-slate-200 bg-white">取消</button>
+                <button onClick={() => setClearConfirm(false)} className="px-3 py-1 rounded text-xs border border-slate-200 dark:border-gray-600 bg-white dark:bg-gray-700">取消</button>
                 <button onClick={handleClearAll} className="px-3 py-1 rounded text-xs bg-red-500 text-white">确认清空</button>
               </div>
             </div>
@@ -75,43 +98,41 @@ export default function WrongBookPage() {
             {Object.entries(grouped).map(([sectionId, sectionItems]) => {
               const info = sectionId !== 'other' ? getSectionInfo(sectionId) : null;
               return (
-                <div key={sectionId} className="bg-white rounded-xl border border-slate-100 overflow-hidden">
+                <div key={sectionId} className="bg-white dark:bg-gray-800 rounded-xl border border-slate-100 dark:border-gray-700 overflow-hidden">
                   {info && (
-                    <div className="px-5 py-3 bg-slate-50 border-b border-slate-100 text-sm text-slate-600">
-                      {info.unit.title} / {info.chapter.title} / {info.section.title}
+                    <div className="px-5 py-3 bg-slate-50 dark:bg-gray-700 border-b border-slate-100 dark:border-gray-600 text-sm text-slate-600 dark:text-gray-300">
+                      <span className="font-medium">{info.unit.title}</span>
+                      <span className="text-slate-400 mx-1">·</span>
+                      <span>{info.section.title}</span>
+                      <span className="text-slate-400 mx-1">·</span>
+                      <span className="text-xs">{sectionItems.length} 题</span>
                     </div>
                   )}
-                  <div className="divide-y divide-slate-50">
-                    {sectionItems.map((item, idx) => (
-                      <div key={item.id} className="px-5 py-4">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500">
-                                {item.type === 'true-false' ? '判断' : item.type === 'single-choice' ? '单选' : item.type === 'multi-choice' ? '多选' : '简答'}
-                              </span>
-                              <span className="text-xs text-slate-400">第{idx + 1}题</span>
-                            </div>
-                            <p className="text-base text-slate-800 mb-2">{item.question}</p>
-                            <div className="bg-red-50 border border-red-100 rounded-lg p-3 text-sm">
-                              <p className="font-medium text-red-800 mb-1">正确答案：</p>
-                              <p className="text-slate-700">{Array.isArray(item.answer) ? item.answer.join('、') : item.answer}</p>
-                            </div>
-                            {item.explanation && (
-                              <p className="text-xs text-slate-500 mt-2">💡 {item.explanation}</p>
+                  <ul className="divide-y divide-slate-50 dark:divide-gray-700">
+                    {sectionItems.map((item) => {
+                      const q = item.question_data;
+                      return (
+                        <li key={item.id} className="px-5 py-3 flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-gray-700/50">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-slate-700 dark:text-gray-300 truncate">{q?.question || '题目加载失败'}</p>
+                            {q?.yourAnswer && (
+                              <p className="text-xs text-red-500 mt-1">你的答案：{q.yourAnswer}</p>
+                            )}
+                            {q?.correctAnswer && (
+                              <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">正确答案：{q.correctAnswer}</p>
                             )}
                           </div>
                           <button
-                            onClick={() => handleRemove(item.id)}
-                            className="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50"
-                            title="移除"
+                            onClick={() => handleRemove(item.question_id)}
+                            className="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+                            aria-label="删除"
                           >
                             <Trash2 size={16} />
                           </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               );
             })}

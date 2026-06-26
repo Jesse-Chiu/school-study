@@ -1,20 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@/hooks/useTheme';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function LoginPage() {
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [inviteCode, setInviteCode] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const { login, register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
-    // 简单的表单验证
     if (!username.trim()) {
       setError('请输入用户名');
       return;
@@ -23,22 +28,37 @@ export default function LoginPage() {
       setError('请输入密码');
       return;
     }
+    if (!isLoginMode && !inviteCode.trim()) {
+      setError('请输入推荐码');
+      return;
+    }
 
     setIsLoading(true);
 
-    // 模拟登录请求
-    setTimeout(() => {
-      // 这里可以替换为实际的登录逻辑
-      if (username === 'admin' && password === '123456') {
-        // 登录成功，保存到 localStorage
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('username', username);
-        navigate('/');
+    try {
+      if (isLoginMode) {
+        const result = await login(username, password);
+        if (result.success) {
+          navigate('/');
+        } else {
+          setError(result.message);
+        }
       } else {
-        setError('用户名或密码错误');
+        const result = await register(username, password, inviteCode);
+        if (result.success) {
+          setSuccess('注册成功！请登录');
+          setIsLoginMode(true);
+          setPassword('');
+          setInviteCode('');
+        } else {
+          setError(result.message);
+        }
       }
+    } catch (err) {
+      setError('操作失败，请重试');
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -46,7 +66,7 @@ export default function LoginPage() {
       {/* 主题切换按钮 */}
       <button
         onClick={toggleTheme}
-        className="fixed top-4 right-4 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+        className="fixed top-4 right-4 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-10"
         aria-label="切换主题"
       >
         {theme === 'light' ? (
@@ -74,11 +94,11 @@ export default function LoginPage() {
               学科备考系统
             </h1>
             <p className="text-gray-500 dark:text-gray-400">
-              登录以访问您的学习资源
+              {isLoginMode ? '登录以访问您的学习资源' : '注册新账号'}
             </p>
           </div>
 
-          {/* 登录表单 */}
+          {/* 登录/注册表单 */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* 用户名输入 */}
             <div className="space-y-2">
@@ -124,6 +144,33 @@ export default function LoginPage() {
               </div>
             </div>
 
+            {/* 推荐码输入（仅注册模式） */}
+            {!isLoginMode && (
+              <div className="space-y-2">
+                <label htmlFor="inviteCode" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  推荐码
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 7z" />
+                    </svg>
+                  </div>
+                  <input
+                    id="inviteCode"
+                    type="text"
+                    value={inviteCode}
+                    onChange={(e) => setInviteCode(e.target.value)}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    placeholder="请输入推荐码"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  推荐码请通过公众号获取
+                </p>
+              </div>
+            )}
+
             {/* 错误提示 */}
             {error && (
               <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg p-3 animate-shake">
@@ -136,7 +183,19 @@ export default function LoginPage() {
               </div>
             )}
 
-            {/* 登录按钮 */}
+            {/* 成功提示 */}
+            {success && (
+              <div className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-3">
+                <p className="text-sm text-green-600 dark:text-green-400 flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {success}
+                </p>
+              </div>
+            )}
+
+            {/* 提交按钮 */}
             <button
               type="submit"
               disabled={isLoading}
@@ -148,17 +207,28 @@ export default function LoginPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  登录中...
+                  {isLoginMode ? '登录中...' : '注册中...'}
                 </>
               ) : (
-                '登录'
+                isLoginMode ? '登录' : '注册'
               )}
             </button>
           </form>
 
-          {/* 提示信息 */}
-          <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-            <p>演示账号：admin / 123456</p>
+          {/* 切换登录/注册模式 */}
+          <div className="text-center">
+            <button
+              onClick={() => {
+                setIsLoginMode(!isLoginMode);
+                setError('');
+                setSuccess('');
+                setPassword('');
+                setInviteCode('');
+              }}
+              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              {isLoginMode ? '没有账号？点击注册' : '已有账号？点击登录'}
+            </button>
           </div>
         </div>
 

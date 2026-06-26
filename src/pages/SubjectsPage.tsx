@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, Map, Compass, Globe, LogOut, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
+import { useAuth } from '@/hooks/useAuth';
 
 const subjects = [
   {
@@ -60,10 +61,10 @@ const subjects = [
 export default function SubjectsPage() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('username');
+    logout();
     navigate('/login');
   };
 
@@ -75,7 +76,7 @@ export default function SubjectsPage() {
         <div className="hidden sm:block">
           <p className="text-sm text-slate-400 dark:text-gray-500">欢迎回来</p>
           <p className="text-lg font-semibold text-slate-700 dark:text-gray-300">
-            {localStorage.getItem('username') || '同学'} 👋
+            {user?.username || '同学'} 👋
           </p>
         </div>
 

@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Trophy, Clock, CheckCircle, RotateCcw, Bookmark, ChevronDown, ChevronUp, FileText, ChevronRight } from 'lucide-react';
 import { getExamPaper, getExamList, type ExamPaper } from '../data/exam-papers';
-import { addMockRecord, getPaperHistory, type MockRecord } from '../lib/mock-history';
-import { addWrongItem, removeWrongItem, getWrongItems } from '../lib/wrong-book';
+import { useAuth } from '../hooks/useAuth';
+import { saveExamRecord, getExamRecords, addWrongQuestion, getWrongQuestions, removeWrongQuestion } from '../lib/database';
 import ClozeRenderer from '../components/exercises/ClozeRenderer';
 import type { Exercise } from '../lib/types';
 
@@ -51,6 +51,7 @@ const formatTime = (sec: number) => {
 
 function PaperSelector({ onSelect, subject }: { onSelect: (paper: ExamPaper) => void; subject?: string }) {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const papers = subject ? getExamList().filter(p => p.subject === subject) : getExamList();
   const homePath = subject === '道法' ? '/dao/mindmap' : subject === '历史' ? '/history/mindmap' : '/biology';
 
@@ -66,7 +67,7 @@ function PaperSelector({ onSelect, subject }: { onSelect: (paper: ExamPaper) => 
 
       <div className="space-y-3">
         {papers.map(p => {
-          const history = getPaperHistory(p.id);
+          const history = user ? getExamRecords(user.id, p.id) : [];
           const bestScore = history.length ? Math.max(...history.map(r => r.score)) : null;
 
           return (
@@ -136,7 +137,16 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
   const [answers, setAnswers] = useState<Record<string, boolean | number | number[] | string | string[]>>({});
   const [submitted, setSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
-  const [wrongBookIds, setWrongBookIds] = useState<Set<string>>(() => new Set(getWrongItems().map(w => w.id)));
+  const { user } = useAuth();
+  const [wrongBookIds, setWrongBookIds] = useState<Set<string>>(new Set());
+  
+  // 从数据库加载错题本
+  useEffect(() => {
+    if (user) {
+      const wrongQuestions = getWrongQuestions(user.id);
+      setWrongBookIds(new Set(wrongQuestions.map(w => w.question_id)));
+    }
+  }, [user]);
   const [reviewFilter, setReviewFilter] = useState<'all' | 'wrong'>('all');
   const [historyExpanded, setHistoryExpanded] = useState(false);
 
@@ -211,18 +221,10 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
 
   const handleSubmitCore = useCallback(() => {
     setSubmitted(true);
-    const record: MockRecord = {
-      paperId: paper.meta.id,
-      paperTitle: paper.meta.title,
-      date: new Date().toLocaleString('zh-CN'),
-      score: correctCount > 0 ? score : Math.round((exercises.filter(ex => checkAnswer(ex, answers[ex.id])).length / TOTAL) * paper.meta.totalScore),
-      correct: exercises.filter(ex => checkAnswer(ex, answers[ex.id])).length,
-      total: TOTAL,
-      timeSpent: TIME_LIMIT - timeLeft,
-    };
-    addMockRecord(record);
+    if (!user) return;
+    saveExamRecord(user.id, paper.meta.id, paper.meta.title, score, paper.meta.totalScore, answers);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [paper, exercises, answers, timeLeft, correctCount, score, TOTAL, TIME_LIMIT]);
+  }, [paper, user, score, answers]);
 
   const handleSubmit = () => handleSubmitCore();
 
@@ -234,14 +236,25 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
   };
 
   const handleToggleWrongBook = (exId: string) => {
+    if (!user) return;
+    
     setWrongBookIds(prev => {
       const next = new Set(prev);
-      if (next.has(exId)) { next.delete(exId); removeWrongItem(exId); }
-      else {
+      if (next.has(exId)) { 
+        next.delete(exId); 
+        removeWrongQuestion(user.id, exId); 
+      } else {
         const ex = exercises.find(e => e.id === exId);
         if (ex) {
           next.add(exId);
-          addWrongItem({ id: ex.id, question: ex.question, type: ex.type, options: ex.options, answer: ex.answer, explanation: ex.explanation, knowledgePoint: ex.knowledgePoint, sectionId: paper.meta.id, addedAt: Date.now() });
+          addWrongQuestion(user.id, ex.id, paper.meta.subject || '生物', '', '', {
+            question: ex.question,
+            type: ex.type,
+            options: ex.options,
+            answer: ex.answer,
+            explanation: ex.explanation,
+            knowledgePoint: ex.knowledgePoint
+          });
         }
       }
       return next;
@@ -287,7 +300,7 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
   const currentEx = exercises[currentIndex];
   const isLast = currentIndex === TOTAL - 1;
   const unansweredCount = exercises.filter(ex => answers[ex.id] === undefined).length;
-  const paperHistory = getPaperHistory(paper.meta.id);
+  const paperHistory = user ? getExamRecords(user.id, paper.meta.id) : [];
   const isCorrect = submitted ? checkAnswer(currentEx, answers[currentEx.id]) : false;
   const isUnanswered = submitted && answers[currentEx.id] === undefined;
   const userAnswer = answers[currentEx.id];
