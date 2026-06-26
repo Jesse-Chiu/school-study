@@ -30,10 +30,68 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install COS Python SDK
+        run: pip install cos-python-sdk-v5
+
       - name: Deploy to Tencent COS
-        run: python deploy_cos.py
         env:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
           COS_BUCKET: ${{ vars.COS_BUCKET }}
           COS_REGION: ${{ vars.COS_REGION }}
+        run: |
+          python <<'PYEOF'
+          import os, sys
+          
+          sec_id = os.environ.get("TENCENT_SECRET_ID", "")
+          sec_key = os.environ.get("TENCENT_SECRET_KEY", "")
+          bucket = os.environ.get("COS_BUCKET", "")
+          region = os.environ.get("COS_REGION", "")
+          
+          print(f"Bucket: {bucket}")
+          print(f"Region: {region}")
+          print(f"SecretId length: {len(sec_id)}")
+          print(f"SecretKey length: {len(sec_key)}")
+          
+          if not all([sec_id, sec_key, bucket, region]):
+              print("ERROR: Missing environment variables!")
+              sys.exit(1)
+          
+          from qcloud_cos import CosConfig, CosS3Client
+          
+          config = CosConfig(Region=region, SecretId=sec_id, SecretKey=sec_key)
+          client = CosS3Client(config)
+          
+          CT = {".html":"text/html; charset=utf-8",".css":"text/css; charset=utf-8",".js":"application/javascript; charset=utf-8",".json":"application/json; charset=utf-8",".svg":"image/svg+xml",".png":"image/png",".jpg":"image/jpeg",".jpeg":"image/jpeg",".webp":"image/webp",".ico":"image/x-icon"}
+          
+          print("Cleaning old files...")
+          try:
+              marker = ""
+              deleted = 0
+              while True:
+                  resp = client.list_objects(Bucket=bucket, Marker=marker)
+                  contents = resp.get("Contents") or []
+                  if not contents:
+                      break
+                  client.delete_objects(Bucket=bucket, Delete={"Object":[{"Key":o["Key"]} for o in contents]})
+                  deleted += len(contents)
+                  if resp.get("IsTruncated") != "true":
+                      break
+                  marker = resp.get("NextMarker", "")
+              print(f"Deleted {deleted} old objects")
+          except Exception as e:
+              print(f"Clean warning: {e}")
+          
+          print("Uploading...")
+          uploaded = 0
+          for root, _, files in os.walk("dist"):
+              for f in files:
+                  path = os.path.join(root, f)
+                  key = os.path.relpath(path, "dist")
+                  ext = os.path.splitext(f)[1].lower()
+                  ct = CT.get(ext, "application/octet-stream")
+                  client.put_object_from_local_file(Bucket=bucket, LocalFilePath=path, Key=key, ContentType=ct)
+                  uploaded += 1
+          
+          print(f"Uploaded {uploaded} files. Done!")
+          PYEOF
