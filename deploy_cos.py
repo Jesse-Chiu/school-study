@@ -90,6 +90,7 @@ for root, _, files in os.walk(dist_dir):
                 LocalFilePath=local,
                 Key=key,
                 ContentType=ct,
+                ContentDisposition='inline',
             )
             uploaded += 1
         except Exception as e:
