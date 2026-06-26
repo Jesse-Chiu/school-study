@@ -30,74 +30,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install COS SDK
-        run: pip install cos-python-sdk-v5
-
       - name: Deploy to Tencent COS
-        run: |
-          python - <<EOF
-          import os
-          from qcloud_cos import CosConfig, CosS3Client
-
-          config = CosConfig(
-              Region=os.environ['COS_REGION'],
-              SecretId=os.environ['TENCENT_SECRET_ID'],
-              SecretKey=os.environ['TENCENT_SECRET_KEY'],
-          )
-          client = CosS3Client(config)
-          bucket = os.environ['COS_BUCKET']
-
-          # 先删除旧文件
-          print("Cleaning old files...")
-          try:
-              marker = ""
-              while True:
-                  resp = client.list_objects(Bucket=bucket, Marker=marker, MaxKeys=100)
-                  contents = resp.get('Contents', [])
-                  if not contents:
-                      break
-                  objects = {'Object': [{'Key': obj['Key']} for obj in contents]}
-                  client.delete_objects(Bucket=bucket, Delete=objects)
-                  print(f"  Deleted {len(contents)} old objects")
-                  if resp.get('IsTruncated') == 'false':
-                      break
-                  marker = resp['NextMarker']
-          except Exception as e:
-              print(f"  Clean warning: {e}")
-
-          # 上传 dist 目录
-          import os.path
-          dist_dir = "dist"
-          content_types = {
-              '.html': 'text/html; charset=utf-8',
-              '.css': 'text/css; charset=utf-8',
-              '.js': 'application/javascript; charset=utf-8',
-              '.json': 'application/json; charset=utf-8',
-              '.svg': 'image/svg+xml',
-              '.png': 'image/png',
-              '.jpg': 'image/jpeg',
-              '.jpeg': 'image/jpeg',
-              '.webp': 'image/webp',
-              '.ico': 'image/x-icon',
-          }
-
-          uploaded = 0
-          for root, dirs, files in os.walk(dist_dir):
-              for fname in files:
-                  local_path = os.path.join(root, fname)
-                  cos_key = os.path.relpath(local_path, dist_dir)
-                  ext = os.path.splitext(fname)[1].lower()
-                  ct = content_types.get(ext, 'application/octet-stream')
-                  client.put_object_from_local_file(
-                      Bucket=bucket,
-                      LocalFilePath=local_path,
-                      Key=cos_key,
-                      ContentType=ct,
-                  )
-                  uploaded += 1
-
-          print(f"Deployed {uploaded} files to {bucket}")
-          EOF
+        run: python deploy_cos.py
         env:
           TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
           TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
