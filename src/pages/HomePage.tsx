@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Brain, FileText, Trophy, Clock } from 'lucide-react';
+import { BookOpen, Brain, FileText, Trophy } from 'lucide-react';
 import { units } from '@/data/structure';
-
-/** 构建时间戳（构建时自动更新） */
-const BUILD_TIME = new Date().toISOString().replace('T', ' ').slice(0, 19);
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -16,11 +13,6 @@ export default function HomePage() {
         <p className="text-emerald-100 text-sm mb-4">
           人教版（2026春版）· 完整知识点 + 专项练习 + 模拟测试
         </p>
-        {/* 版本号 */}
-        <div className="inline-flex items-center gap-1.5 bg-black/20 text-white/90 text-xs mt-3 px-2.5 py-1 rounded-full font-mono">
-          <Clock size={12} />
-          <span>构建版本：{BUILD_TIME}</span>
-        </div>
         <div className="flex gap-3 mt-4">
           <button
             onClick={() => navigate('/mindmap')}

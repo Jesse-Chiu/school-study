@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@/hooks/useTheme';
 import { useAuth } from '@/hooks/useAuth';
 
+/** 构建时间戳（npm run build 时自动更新） */
+const BUILD_TIME = new Date().toISOString().replace('T', ' ').slice(0, 19);
+
 export default function LoginPage() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
@@ -146,17 +149,20 @@ export default function LoginPage() {
         </div>
 
         {/* 免责声明 */}
-        <div className="mt-6 px-2">
-          <p className="text-xs text-gray-400 dark:text-gray-500 text-center leading-relaxed">
-            本网站内容整理自公开网络资源，仅供个人非商业参考。无需注册，不收集任何用户信息，完全免费。
-            如涉及版权问题，请通过公众号联系我们，会在第一时间配合处理。
+        <p className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500 leading-relaxed px-4">
+          本网站内容整理自公开网络资源，仅供个人非商业参考。无需注册，不收集任何用户信息，完全免费。
+          如涉及版权问题，请通过公众号联系我们，会在第一时间配合处理。
+        </p>
+
+        {/* 底部信息 */}
+        <div className="mt-4 flex flex-col items-center gap-1.5">
+          <p className="text-xs text-gray-400 dark:text-gray-500">
+            © 2026 好好学习系统 · 仅供学习交流使用
+          </p>
+          <p className="text-xs text-gray-400/60 dark:text-gray-500/60 font-mono">
+            v{BUILD_TIME}
           </p>
         </div>
-
-        {/* 底部版权 */}
-        <p className="mt-4 text-center text-xs text-gray-400 dark:text-gray-500">
-          © 2026 好好学习系统 · 仅供学习交流使用
-        </p>
       </div>
     </div>
   );
