@@ -186,23 +186,23 @@ function PaperSelector({ onSelect, subject }: { onSelect: (paper: ExamPaper) => 
 
       {/* 原试卷下载提示 */}
       <div className="mt-6 bg-amber-50/70 border border-amber-200/60 rounded-xl p-4">
-        <div className="flex items-start gap-3">
-          <div className="w-9 h-9 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <AlertTriangle size={18} className="text-amber-600" />
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
+            <AlertTriangle size={20} className="text-amber-600" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-amber-700/80 leading-relaxed">
-              ⚠️ 目前题库中部分题目的图片信息可能存在错乱或缺失。如需准确完整的试卷内容，请下载原版PDF直接参考打印。
+            <p className="text-sm text-amber-700/90 leading-relaxed">
+              抱歉，目前题库中部分题目的图片信息可能存在错乱或缺失，建议您下载原版PDF获取准确完整的试卷内容。我们会持续完善题库质量，感谢您的关注与支持！
             </p>
-            <a
-              href={`${import.meta.env.BASE_URL}downloads/pingdong-2025-biology.pdf`}
-              download
-              className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-white border border-amber-300 rounded-lg text-amber-700 hover:bg-amber-50 hover:border-amber-400 transition-all text-sm font-medium shadow-sm"
-            >
-              <Download size={16} />
-              <span>下载原版试卷（8.9MB）</span>
-            </a>
           </div>
+          <a
+            href={`${import.meta.env.BASE_URL}downloads/pingdong-2025-biology.pdf`}
+            download
+            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-amber-300 rounded-lg text-amber-700 hover:bg-amber-50 hover:border-amber-400 transition-all text-sm font-medium shadow-sm whitespace-nowrap"
+          >
+            <Download size={18} />
+            <span>下载原版试卷（8.9MB）</span>
+          </a>
         </div>
       </div>
     </div>
