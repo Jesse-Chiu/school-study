@@ -37,7 +37,7 @@ export const pingdong2025: ExamPaper = {
       ],
       answer: 3,
       explanation: `D 【解析】水分和无机盐是通过木质部中的导管运输的，环割处理不会影响橘子树对水分和无机盐的运输，D错误。故选D。`,
-      image: '/exam-images/pingdong-2025/page1_2.png'
+      image: '/exam-images/pingdong-2025/page1_2.png', // 环割处理示意图
     },
     
     // ==================== 二、非选择题 ====================
@@ -45,6 +45,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-3',
       type: 'single-choice',
       question: `福州街头和公园种有许多红花鸡蛋花，早春时节，花朵热烈绽放，令行人赏心悦目。完成下面小题：\n\n（1）俗话说"根深才能叶茂"，如图根尖结构中，与"根深"和"叶茂"有关的区域分别是（ ）`,
+      image: '/exam-images/pingdong-2025/page2_1.png', // 根尖结构图
       options: ['③区；①区和②区', '②区和③区；①区', '③区和④区；②区', '②区；①区和③区'],
       answer: 1,
       explanation: `B 【解析】"根深"是植物的根不断在土壤中延伸的结果，是③分生区使细胞数目增多和②伸长区使细胞体积增大造成的。成熟区是吸收水分和无机盐的部位。"叶茂"是植物①成熟区吸收无机盐的结果，B正确。故选B。`
@@ -53,6 +54,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-3-2',
       type: 'single-choice',
       question: `（2）如图甲是叶芽的纵切示意图，乙是枝条示意图。下列叙述错误的是（ ）`,
+      image: '/exam-images/pingdong-2025/page3_2.png', // 叶芽纵切和枝条示意图
       options: ['①将来发育为叶', '②中含有分生组织', '③将来发育为芽', '④一定发育为花'],
       answer: 3,
       explanation: `D 【解析】图甲中的④是芽原基，将来发育成侧芽，D错误。故选D。`
@@ -77,6 +79,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-3-5',
       type: 'single-choice',
       question: `（5）如图中①②③分别表示鸡蛋花的生理活动，使公园内空气"湿润、清新"的生理活动分别是（ ）`,
+      image: '/exam-images/pingdong-2025/page4_5.png', // 生理活动图（①②③）
       options: ['①，②', '①，③', '②，③', '②①，③'],
       answer: 2,
       explanation: `C 【解析】图中①是呼吸作用、②是蒸腾作用、③是光合作用。植物的蒸腾作用使空气湿润；光合作用吸收二氧化碳，释放氧气，使空气清新，所以可以使公园内空气"湿润、清新"的生理活动分别是②蒸腾作用和③光合作用，C正确。故选C。`
@@ -87,6 +90,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-4',
       type: 'single-choice',
       question: `如图甲是植物根毛细胞，乙是人体小肠绒毛上皮细胞，下列叙述错误的是（ ）`,
+      image: '/exam-images/pingdong-2025/page5_2.png', // 根毛细胞和小肠绒毛上皮细胞图
       options: [
         '甲细胞和乙细胞都具有吸收功能',
         '甲细胞和乙细胞一侧的表面形成突起，增大了吸收的表面积',
@@ -182,6 +186,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-14',
       type: 'single-choice',
       question: `如图是在显微镜下观察到的人血涂片示意图。下列分析正确的是（ ）`,
+      image: '/exam-images/pingdong-2025/page11_6.png', // 人血涂片示意图
       options: [
         '①具有细胞核，可以吞噬病菌',
         '②体积最大，内富含血红蛋白，可以运输氧气',
@@ -236,6 +241,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-16-3',
       type: 'single-choice',
       question: `（3）中医讲"五脏之真，唯肾为根"。如图为肾单位形成尿液的过程，下列相关叙述正确的是（ ）`,
+      image: '/exam-images/pingdong-2025/page12_2.png', // 肾单位形成尿液过程图
       options: [
         '①②③④⑤中都含有水、无机盐和尿素',
         '⑤与①中的血液相比，尿素增加',
@@ -249,6 +255,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-16-4',
       type: 'single-choice',
       question: `（4）"切脉"是中医独创的诊法。"切脉"主要触摸病人桡动脉的腕后部分（如图所示）。下列有关桡动脉的描述错误的是（ ）`,
+      image: '/exam-images/pingdong-2025/page13_2.png', // 桡动脉示意图
       options: [
         '管壁厚、弹性大，每分钟脉搏的次数与心跳次数相同',
         '其内血液流向为______（填"从心脏到全身"或"从全身回到心脏"）',
@@ -270,6 +277,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-16-6',
       type: 'single-choice',
       question: `（6）太极拳十分注重中医的"吐纳"技巧，如图所示人的膈肌收缩和舒张时在胸腔内的最大位置，下列有关叙述正确的是（ ）`,
+      image: '/exam-images/pingdong-2025/page15_0.png', // 膈肌收缩和舒张示意图
       options: [
         '呼出的气体只有二氧化碳',
         '呼出的气体氧气含量低于吸入的气体',
@@ -285,6 +293,7 @@ export const pingdong2025: ExamPaper = {
       id: 'pingdong-2025-17',
       type: 'true-false',
       question: `生物技术帮助人类实现了孕育新生命的愿望。如图为试管婴儿技术的操作流程，请据图判断下列题目的对错，正确的填"对"，错误的填"错"。\n\n1. ③能促进第二性征，是女性主要的生殖器官。（ ）\n2. 试管婴儿技术中，"试管"相当于结构②，若②堵塞，可通过该技术辅助生育。（ ）\n3. 采卵针穿刺进入①内可获取卵细胞。（ ）\n4. 由图可知，此技术中受精卵直接植入母体。（ ）\n5. 此技术中胎儿所需要的营养物质主要还是由母体提供。（ ）`,
+      image: '/exam-images/pingdong-2025/page16_0.jpeg', // 试管婴儿技术操作流程图
       answer: false, // 错对对错对
       explanation: `错对对错对 【解析】\n1. 女性主要的生殖器官是①卵巢，能产生卵细胞并分泌雌性激素，雌性激素能促进第二性征的出现。故题目说法错误。\n2. 试管婴儿技术是让精子和卵细胞在体外受精，"试管"相当于②输卵管，如果输卵管堵塞，自然受精困难，可通过试管婴儿技术辅助生育。故题目说法正确。\n3. 图中①是卵巢，它是女性的主要生殖器官，可以产生卵细胞并分泌雌性激素，因此，采卵针穿刺进入①卵巢内可获取卵细胞。故题目说法正确。\n4. 根据题图可知，植入母体的是早期胚胎，而不是受精卵。故题目说法错误。\n5. 早期胚胎植入母体后，细胞继续分裂和分化，形成组织，并进一步形成器官，逐渐发育成胚胎，并于怀孕8周左右发育成胎儿，胎儿已具备人的形态；胎儿生活在母体子宫内半透明的羊水中，通过胎盘从母体获得所需要的营养物质和氧气。故题目说法正确。`
     },
