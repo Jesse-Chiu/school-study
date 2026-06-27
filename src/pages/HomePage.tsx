@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Brain, FileText, Trophy } from 'lucide-react';
+import { BookOpen, Brain, FileText, Trophy, Clock } from 'lucide-react';
 import { units } from '@/data/structure';
+
+/** 构建时间戳（构建时自动更新） */
+const BUILD_TIME = new Date().toISOString().replace('T', ' ').slice(0, 19);
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -8,12 +11,17 @@ export default function HomePage() {
   return (
     <div className="max-w-5xl mx-auto">
       {/* 顶部横幅 */}
-      <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 text-white mb-8">
+      <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 text-white mb-8 relative overflow-hidden">
         <h1 className="text-2xl font-bold mb-2">📘 七年级下册生物 · 期末备考</h1>
         <p className="text-emerald-100 text-sm mb-4">
           人教版（2026春版）· 完整知识点 + 专项练习 + 模拟测试
         </p>
-        <div className="flex gap-3">
+        {/* 版本号 */}
+        <div className="flex items-center gap-1.5 text-xs text-white/60 mt-3 font-mono">
+          <Clock size={12} />
+          <span>v{BUILD_TIME}</span>
+        </div>
+        <div className="flex gap-3 mt-4">
           <button
             onClick={() => navigate('/mindmap')}
             className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
