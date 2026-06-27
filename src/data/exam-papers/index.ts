@@ -10,10 +10,12 @@ import { daoSanmu2024 } from './dao-sanmu-2024';
 import { daoPingdong2024 } from './dao-pingdong-2024';
 import { daoYangqiao2024 } from './dao-yangqiao-2024';
 import { historyPingdong2024 } from './history-pingdong-2024';
+import { pingdong2025 } from './pingdong-2025';
 
 /** 所有可用试卷 */
 export const examPapers: ExamPaper[] = [
   defaultExam,
+  pingdong2025,
   daoJiuxiao2024,
   daoSanmu2024,
   daoPingdong2024,
