@@ -9,6 +9,34 @@ import type { Exercise } from '../lib/types';
 
 // ────────── 工具函数 ──────────
 
+// 将题目文本中的 Markdown 表格渲染为 HTML 表格
+function renderQuestionText(text: string): string {
+  // 处理完整的 Markdown 表格块
+  // 匹配: 表头行 + 分隔行 + 数据行
+  const tableRegex = /^\|(.+)\|\n\|[-:| ]+\|\n(\|.+\|\n?)+/gm;
+  return text.replace(tableRegex, (match) => {
+    const rows = match.trim().split('\n');
+    if (rows.length < 2) return match;
+
+    // 解析表头
+    const headerCells = rows[0].split('|').filter((_, i, a) => i > 0 && i < a.length - 1 || a.length <= 2);
+    let html = '<table class="w-full border-collapse border border-slate-300 my-3 text-sm">';
+    html += '<thead><tr class="bg-slate-100">' + headerCells.map(c => `<th class="border border-slate-300 px-3 py-1.5 text-left">${c.trim()}</th>`).join('') + '</tr></thead>';
+    html += '<tbody>';
+
+    // 数据行（从第2行开始，跳过第1行表头和分割行）
+    for (let i = 2; i < rows.length; i++) {
+      const dataCells = rows[i].split('|').filter((_, idx, a) => idx > 0 && idx < a.length - 1 || a.length <= 2);
+      html += '<tr>' + dataCells.map(c => `<td class="border border-slate-300 px-3 py-1.5">${c.trim()}</td>`).join('') + '</tr>';
+    }
+
+    html += '</tbody></table>';
+    return html;
+  });
+}
+
+// 判断文本是否包含 HTML 标签，决定使用哪种渲染方式
+
 // 返回本题得分详情（支持按空格给分）
 function checkAnswer(
   ex: Exercise,
@@ -535,7 +563,16 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
           )}
         </div>
 
-        <p className="text-base text-slate-800 mb-4 leading-relaxed">{currentEx.question}</p>
+        {/* 题目内容 */}
+        {(() => {
+          const html = renderQuestionText(currentEx.question);
+          const hasTable = html !== currentEx.question;
+          return hasTable ? (
+            <div className="text-base text-slate-800 mb-4 leading-relaxed" dangerouslySetInnerHTML={{ __html: html }} />
+          ) : (
+            <p className="text-base text-slate-800 mb-4 leading-relaxed whitespace-pre-wrap">{currentEx.question}</p>
+          );
+        })()}
 
         {/* 题目配图 */}
         {currentEx.image && (
