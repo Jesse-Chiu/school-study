@@ -540,7 +540,7 @@ function ExamSession({ paper, onBack }: { paper: ExamPaper; onBack: () => void }
         {/* 题目配图 */}
         {currentEx.image && (
           <div className="mb-4 p-2 bg-slate-50 rounded-lg flex justify-center">
-            <img src={currentEx.image} alt="题目配图" className="max-w-full max-h-80 object-contain rounded" loading="lazy" />
+            <img src={`${import.meta.env.BASE_URL}${currentEx.image.startsWith('/') ? currentEx.image.slice(1) : currentEx.image}`} alt="题目配图" className="max-w-full max-h-80 object-contain rounded" loading="lazy" />
           </div>
         )}
 
