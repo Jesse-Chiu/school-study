@@ -17,9 +17,9 @@ export default function HomePage() {
           人教版（2026春版）· 完整知识点 + 专项练习 + 模拟测试
         </p>
         {/* 版本号 */}
-        <div className="flex items-center gap-1.5 text-xs text-white/60 mt-3 font-mono">
+        <div className="inline-flex items-center gap-1.5 bg-black/20 text-white/90 text-xs mt-3 px-2.5 py-1 rounded-full font-mono">
           <Clock size={12} />
-          <span>v{BUILD_TIME}</span>
+          <span>构建版本：{BUILD_TIME}</span>
         </div>
         <div className="flex gap-3 mt-4">
           <button
