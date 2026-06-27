@@ -184,7 +184,8 @@ function PaperSelector({ onSelect, subject }: { onSelect: (paper: ExamPaper) => 
         </button>
       </div>
 
-      {/* 原试卷下载提示 */}
+      {/* 原试卷下载提示 — 仅生物模块显示 */}
+      {(!subject || subject === '生物') && (
       <div className="mt-6 bg-amber-50/70 border border-amber-200/60 rounded-xl p-4">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
@@ -205,6 +206,7 @@ function PaperSelector({ onSelect, subject }: { onSelect: (paper: ExamPaper) => 
           </a>
         </div>
       </div>
+      )}
     </div>
   );
 }
